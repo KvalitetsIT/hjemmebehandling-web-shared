@@ -1,11 +1,12 @@
 
-import { Alert, Typography } from "@mui/material";
+import { Alert, Button, Typography } from "@mui/material";
 import React, { ErrorInfo } from "react";
 import { ToastError } from "./ToastError";
 
 export interface Props {
   rerenderChildren: boolean
   ekstraText: string;
+  showReloadButton : boolean;
 }
 export interface State {
   error?: Error
@@ -14,12 +15,13 @@ export interface State {
 export class ErrorBoundary extends React.Component<Props, State> {
   public static defaultProps = {
     rerenderChildren: false,
-    ekstraText: ""
+    ekstraText: "",
+    showReloadButton : false
   };
 
   constructor(props: Props) {
     super(props);
-    this.state = { error: undefined };
+    this.state = { error: undefined};
   }
 
   static getDerivedStateFromError(error: Error): State {
@@ -33,7 +35,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
     console.debug(errorInfo)
 
   }
-
+  reloadPage() : void {
+    window.location.replace("/");
+  }
 
   render(): JSX.Element {
     if (this.state.error) {
@@ -42,6 +46,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         <Alert severity="error" title={this.props.ekstraText}>
           <Typography variant={this.props.ekstraText ? "caption" : "inherit"}>Der er opstået en fejl</Typography>
           <Typography>{this.props.ekstraText}</Typography>
+          {this.props.showReloadButton ? <Button onClick={()=>{this.reloadPage()}}>Genindlæs</Button> : <></>}
         </Alert>
         <ToastError error={this.state.error}></ToastError>
       </>)
@@ -54,4 +59,3 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   }
 }
-

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Frequency_1 = require("../../Models/Frequency");
 class DanishDateHelper {
     DateToString(date) {
         let toReturn = "";
@@ -13,20 +14,20 @@ class DanishDateHelper {
     }
     DayIndexToDay(dayIndex) {
         if (dayIndex === 0)
-            return "Søndag";
+            return Frequency_1.DayEnum.Sunday;
         if (dayIndex === 1)
-            return "Mandag";
+            return Frequency_1.DayEnum.Monday;
         if (dayIndex === 2)
-            return "Tirsdag";
+            return Frequency_1.DayEnum.Tuesday;
         if (dayIndex === 3)
-            return "Onsdag";
+            return Frequency_1.DayEnum.Wednesday;
         if (dayIndex === 4)
-            return "Torsdag";
+            return Frequency_1.DayEnum.Thursday;
         if (dayIndex === 5)
-            return "Fredag";
+            return Frequency_1.DayEnum.Friday;
         if (dayIndex === 6)
-            return "Lørdag";
-        return "ukendt";
+            return Frequency_1.DayEnum.Saturday;
+        throw Error("dayIndex was not in range 0 <= x <= 6");
     }
 }
 exports.default = DanishDateHelper;

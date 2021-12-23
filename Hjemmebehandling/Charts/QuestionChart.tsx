@@ -22,7 +22,7 @@ export interface Props {
   questionnaireResponses: QuestionnaireResponse[]
   thresholds: ThresholdNumber[]
   minimal: boolean;
-  dateHelper: IDateHelper;
+  dateToString: (date : Date) => string;
 }
 
 export interface State {
@@ -32,7 +32,8 @@ export interface State {
 export class QuestionChart extends Component<Props, State> {
   static displayName = QuestionChart.name;
   static defaultProps = {
-    minimal: false
+    minimal: false,
+    dateToString : (date : Date) => date.toLocaleDateString()
   }
 
   dateHelper!: IDateHelper
@@ -42,11 +43,7 @@ export class QuestionChart extends Component<Props, State> {
     this.state = {
       displayMode: DisplayModeEnum.GRAPH
     }
-    this.dateHelper = props.dateHelper;
 
-  }
-  initialiszeServices(): void {
-    this.dateHelper = this.context.dateHelper;
   }
 
   getChipColorFromCategory(category: CategoryEnum): string {
@@ -188,8 +185,6 @@ export class QuestionChart extends Component<Props, State> {
   }
   render(): JSX.Element {
 
-    this.initialiszeServices();
-
     const questionnaireResponses = this.props.questionnaireResponses;
     const question = this.props.question;
 
@@ -206,7 +201,7 @@ export class QuestionChart extends Component<Props, State> {
         const answer = response.questions.get(questionnaireQuestion!) as NumberAnswer
 
         answersData.push(answer.answer)
-        answersLabels.push(this.dateHelper.DateToString(response.answeredTime!))
+        answersLabels.push(this.props.dateToString(response.answeredTime!))
       }
     }
 

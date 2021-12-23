@@ -42,10 +42,6 @@ class QuestionChart extends react_1.Component {
         this.state = {
             displayMode: DisplayModeEnum.GRAPH
         };
-        this.dateHelper = props.dateHelper;
-    }
-    initialiszeServices() {
-        this.dateHelper = this.context.dateHelper;
     }
     getChipColorFromCategory(category) {
         const transparency = 1;
@@ -161,7 +157,6 @@ class QuestionChart extends react_1.Component {
                     })))));
     }
     render() {
-        this.initialiszeServices();
         const questionnaireResponses = this.props.questionnaireResponses;
         const question = this.props.question;
         const answersData = []; //Contains all numbers that should be shown in chart
@@ -173,7 +168,7 @@ class QuestionChart extends react_1.Component {
                 const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id == question.Id);
                 const answer = response.questions.get(questionnaireQuestion);
                 answersData.push(answer.answer);
-                answersLabels.push(this.dateHelper.DateToString(response.answeredTime));
+                answersLabels.push(this.props.dateToString(response.answeredTime));
             }
         }
         const dataSets = []; //Each entry represents one line in the chart
@@ -219,5 +214,6 @@ class QuestionChart extends react_1.Component {
 exports.QuestionChart = QuestionChart;
 QuestionChart.displayName = QuestionChart.name;
 QuestionChart.defaultProps = {
-    minimal: false
+    minimal: false,
+    dateToString: (date) => date.toLocaleDateString()
 };

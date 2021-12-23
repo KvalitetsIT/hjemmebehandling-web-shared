@@ -1,10 +1,11 @@
 import { Frequency } from "./Frequency";
+import { Question } from "./Question";
 import { ThresholdCollection } from "./ThresholdCollection";
 
 export class Questionnaire {
     id! : string;
-    name!: string;
-    frequency!: Frequency;
-    thresholds!: ThresholdCollection[];
-    //TODO: Questions should be here
+    name?: string;
+    frequency?: Frequency;
+    thresholds?: ThresholdCollection[];
+    questions? : Question[]
 }
