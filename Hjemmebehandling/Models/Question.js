@@ -10,6 +10,7 @@ exports.Question = Question;
 var QuestionTypeEnum;
 (function (QuestionTypeEnum) {
     QuestionTypeEnum["CHOICE"] = "CHOICE";
+    QuestionTypeEnum["BOOLEAN"] = "BOOLEAN";
     QuestionTypeEnum["INTEGER"] = "INTEGER";
     QuestionTypeEnum["OBSERVATION"] = "M\u00E5ling";
     QuestionTypeEnum["STRING"] = "STRING";

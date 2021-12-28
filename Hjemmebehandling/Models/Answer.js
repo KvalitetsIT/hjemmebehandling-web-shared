@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitType = exports.NumberAnswer = exports.StringAnswer = void 0;
+exports.UnitType = exports.BooleanAnswer = exports.NumberAnswer = exports.StringAnswer = void 0;
 class StringAnswer {
     ToString() {
         return this.answer ? this.answer : "";
@@ -15,6 +15,12 @@ class NumberAnswer {
     }
 }
 exports.NumberAnswer = NumberAnswer;
+class BooleanAnswer {
+    ToString() {
+        return this.answer ? "Ja" : "Nej";
+    }
+}
+exports.BooleanAnswer = BooleanAnswer;
 var UnitType;
 (function (UnitType) {
     UnitType["KG"] = "KG";

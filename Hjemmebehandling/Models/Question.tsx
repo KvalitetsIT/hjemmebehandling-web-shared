@@ -12,6 +12,7 @@ export class Question implements IComparable<Question>{
 
 export enum QuestionTypeEnum{
     CHOICE = 'CHOICE',
+    BOOLEAN = 'BOOLEAN',
     INTEGER = 'INTEGER',
     OBSERVATION = 'Måling', // Måling/Observation etc!
     STRING = 'STRING'

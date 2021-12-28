@@ -1,4 +1,3 @@
-//TODO: Find out how to answer with a number, or checkboxes or multiplechoice etc
 export interface Answer{
     ToString : () => string
 }
@@ -7,6 +6,7 @@ export class StringAnswer implements Answer{
     
     answer! : string
     ToString() : string {
+
         return this.answer ? this.answer : "" 
     }
 }
@@ -20,6 +20,14 @@ export class NumberAnswer implements Answer {
             return this.answer ? this.answer + " " + this.unit.toString() : "" 
         
         return this.answer ? this.answer + "" : "" 
+    }
+}
+
+export class BooleanAnswer implements Answer {
+    answer! : boolean
+    
+    ToString() : string {
+       return this.answer ? "Ja" : "Nej"
     }
 }
 export enum  UnitType {
