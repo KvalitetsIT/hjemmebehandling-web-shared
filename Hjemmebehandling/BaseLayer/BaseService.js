@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const BaseApiError_1 = require("../Errorhandling/BaseApiError");
 const BaseServiceError_1 = require("../Errorhandling/BaseServiceError");
 const BadRequestError_1 = require("../Errorhandling/ServiceErrors/BadRequestError");
+const InternalServerError_1 = require("../Errorhandling/ServiceErrors/InternalServerError");
 const InvalidInputError_1 = require("../Errorhandling/ServiceErrors/InvalidInputError");
 const NotCorrectRightsError_1 = require("../Errorhandling/ServiceErrors/NotCorrectRightsError");
 const NotFoundError_1 = require("../Errorhandling/ServiceErrors/NotFoundError");
@@ -40,6 +41,8 @@ class BaseService {
                     return new NotCorrectRightsError_1.NotCorrectRightsError();
                 case 404:
                     return new NotFoundError_1.NotFoundError();
+                case 500:
+                    return new InternalServerError_1.InternalServerError();
             }
         }
         return apiError;
