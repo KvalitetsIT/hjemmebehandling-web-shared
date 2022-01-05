@@ -46,12 +46,12 @@ class QuestionChart extends react_1.Component {
     getChipColorFromCategory(category) {
         const transparency = 1;
         if (category === CategoryEnum_1.CategoryEnum.RED)
-            return "rgba(215,11,4," + transparency + ")";
+            return "#EE6969";
         if (category === CategoryEnum_1.CategoryEnum.YELLOW)
-            return "rgba(255, 255, 0," + transparency + ")";
+            return "#FFD78C";
         if (category === CategoryEnum_1.CategoryEnum.BLUE)
             return "rgba(75,192,192," + transparency + ")";
-        return "rgba(185,232,64," + transparency + ")";
+        return "#61BD84";
     }
     getDisplayNameFromCategory(category) {
         if (category === CategoryEnum_1.CategoryEnum.RED)
