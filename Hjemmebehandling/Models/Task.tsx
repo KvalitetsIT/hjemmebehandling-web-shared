@@ -1,3 +1,4 @@
+import { StringFormatter } from "../Helpers/ModelHelpers/StringFormatters";
 import { CategoryEnum } from "./CategoryEnum";
 
 export class Task {
@@ -12,4 +13,8 @@ export class Task {
     answeredTime? : Date
     planDefinitionName? : string
     responseLinkEnabled! : boolean
+
+    cprToString() : string {
+        return StringFormatter.FormatCpr(this.cpr);
+    }
 }

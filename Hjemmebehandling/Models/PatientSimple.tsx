@@ -2,9 +2,15 @@
     //Used in: 
     //- Tasklist
 
+import { StringFormatter } from "../Helpers/ModelHelpers/StringFormatters";
+
 export class PatientSimple {
     firstname?: string;
     lastname? : string;
     cpr?: string;
 
+    cprToString() : string {
+        return StringFormatter.FormatCpr(this.cpr);
+    }
+    
 }
