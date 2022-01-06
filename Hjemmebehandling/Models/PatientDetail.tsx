@@ -1,3 +1,4 @@
+import { StringFormatter } from "../Helpers/ModelHelpers/StringFormatters";
 import { Address } from "./Address";
 import { Contact } from "./Contact";
 import { PatientSimple } from "./PatientSimple";
@@ -11,4 +12,11 @@ export class PatientDetail extends PatientSimple {
     address? : Address
     contact? : Contact;
     username? : string;
+
+    primaryPhonenumberToString() : string {
+        return StringFormatter.FormatPhonenumber(this.primaryPhone);
+    }
+    secondaryPhonenumberToString() : string {
+        return StringFormatter.FormatPhonenumber(this.secondaryPhone);
+    }
 }
