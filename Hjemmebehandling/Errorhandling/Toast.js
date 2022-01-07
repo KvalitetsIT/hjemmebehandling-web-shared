@@ -18,31 +18,36 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ToastError = void 0;
-const react_1 = __importStar(require("react"));
+exports.Toast = void 0;
+const React = __importStar(require("react"));
+const react_1 = require("react");
+const Alert_1 = __importDefault(require("@mui/material/Alert"));
 const material_1 = require("@mui/material");
-const Toast_1 = require("./Toast");
-class ToastError extends react_1.Component {
+class Toast extends react_1.Component {
     constructor(props) {
         super(props);
         this.closeSnackbar = () => {
             this.setState({ snackbarOpen: false });
         };
+        this.state = {
+            snackbarOpen: true
+        };
+    }
+    TransitionUp(props) {
+        return React.createElement(material_1.Slide, Object.assign({}, props, { direction: "up" }));
     }
     render() {
-        return (react_1.default.createElement(react_1.default.Fragment, null, [this.props.error].map(e => {
-            const error = e;
-            return (react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(Toast_1.Toast, { snackbarColor: "error", snackbarTitle: "" },
-                    react_1.default.createElement(material_1.Stack, null,
-                        react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, error.displayTitle()),
-                        react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayUrl())),
-                    error.displayMessage())));
-        })));
+        let props = this.props;
+        return (React.createElement(React.Fragment, null,
+            React.createElement(material_1.Snackbar, { TransitionComponent: this.TransitionUp, open: this.state.snackbarOpen, autoHideDuration: 6000, onClose: this.closeSnackbar, anchorOrigin: { vertical: 'bottom', horizontal: 'right' } },
+                React.createElement(Alert_1.default, { severity: props.snackbarColor, sx: { width: '100%' } },
+                    React.createElement("h5", null, props.snackbarTitle),
+                    props.children))));
     }
 }
-exports.ToastError = ToastError;
-ToastError.defaultProps = {
-    severity: "error"
-};
+exports.Toast = Toast;
+Toast.displayName = Toast.name;
