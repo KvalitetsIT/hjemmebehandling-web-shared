@@ -6,12 +6,7 @@ export class User{
     fullName?: string;
 	orgId?: string;
 	email?: string;
-	entitlements?: EntitlementEnum[];
+	entitlements?: string[];
 	autorisationsids?: string[];
 	orgName?: string;
-}
-export enum EntitlementEnum{
-	NURSE = "Sygeplejerske",
-	SOSU = "SOSU",
-	UNKNOWN = "UKENDT"
 }

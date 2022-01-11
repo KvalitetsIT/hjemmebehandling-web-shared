@@ -8,6 +8,8 @@ const material_1 = require("@mui/material");
 const react_1 = __importDefault(require("react"));
 const InternalServerError_1 = require("./ServiceErrors/InternalServerError");
 const NotCorrectRightsError_1 = require("./ServiceErrors/NotCorrectRightsError");
+const UnknownServiceError_1 = require("./ServiceErrors/UnknownServiceError");
+const UnsupportedError_1 = require("./ServiceErrors/UnsupportedError");
 const ToastError_1 = require("./ToastError");
 class ErrorBoundary extends react_1.default.Component {
     constructor(props) {
@@ -43,6 +45,10 @@ class ErrorBoundary extends react_1.default.Component {
             return true;
         if (this.state.error instanceof InternalServerError_1.InternalServerError)
             return true;
+        if (this.state.error instanceof UnknownServiceError_1.UnknownServiceError)
+            return true;
+        if (this.state.error instanceof UnsupportedError_1.UnsupportedError)
+            return true;
         return false;
     }
     logout() {
@@ -63,7 +69,7 @@ class ErrorBoundary extends react_1.default.Component {
                 react_1.default.createElement(material_1.DialogContentText, null,
                     react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayMessage()))),
             react_1.default.createElement(material_1.DialogActions, null,
-                shouldShowReloadButton ? react_1.default.createElement(material_1.Button, { onClick: this.reloadPage }, "Opdat\u00E9r siden") : react_1.default.createElement(react_1.default.Fragment, null),
+                shouldShowReloadButton ? react_1.default.createElement(material_1.Button, { autoFocus: true, onClick: this.reloadPage }, "Opdat\u00E9r siden") : react_1.default.createElement(react_1.default.Fragment, null),
                 shouldShowLogout ? react_1.default.createElement(material_1.Button, { variant: "contained", onClick: this.logout }, "Log ud") : react_1.default.createElement(react_1.default.Fragment, null))));
     }
 }

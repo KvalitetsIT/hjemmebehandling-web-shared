@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Stack, Typography } from '@mui/material';
 import { BaseServiceError } from "./BaseServiceError";
 import { Toast } from "./Toast";
+import { UnknownServiceError } from "./ServiceErrors/UnknownServiceError";
 
 export interface Props {
     error: any
@@ -25,21 +26,26 @@ export class ToastError extends Component<Props, {}>{
         return (<>
             {[this.props.error].map(e => {
 
-                const error = e as BaseServiceError
-                return (
-                    <>
-                        <Toast snackbarColor="error" snackbarTitle="">
-                            <Stack>
-                                <Typography variant="subtitle1">{error.displayTitle()}</Typography>
-                                <Typography variant="caption">{error.displayUrl()}</Typography>
-                            </Stack>
-                            {error.displayMessage()}
-                        </Toast>
-                    </>
-                )
+                let error: BaseServiceError = new UnknownServiceError(e);
+                if (e instanceof BaseServiceError) {
+                    error = e as BaseServiceError
+                }
+                return this.renderError(error.displayTitle(), error.displayUrl(), error.displayMessage());
             })}
 
         </>
+        )
+    }
+
+    renderError(title: string, url: string, message: string) {
+        return (
+            <Toast snackbarColor="error" snackbarTitle="">
+                <Stack>
+                    <Typography variant="subtitle1">{title}</Typography>
+                    <Typography variant="caption">{url}</Typography>
+                </Stack>
+                {message}
+            </Toast>
         )
     }
 }

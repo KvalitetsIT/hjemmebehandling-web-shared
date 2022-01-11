@@ -22,7 +22,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ToastError = void 0;
 const react_1 = __importStar(require("react"));
 const material_1 = require("@mui/material");
+const BaseServiceError_1 = require("./BaseServiceError");
 const Toast_1 = require("./Toast");
+const UnknownServiceError_1 = require("./ServiceErrors/UnknownServiceError");
 class ToastError extends react_1.Component {
     constructor(props) {
         super(props);
@@ -32,14 +34,19 @@ class ToastError extends react_1.Component {
     }
     render() {
         return (react_1.default.createElement(react_1.default.Fragment, null, [this.props.error].map(e => {
-            const error = e;
-            return (react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(Toast_1.Toast, { snackbarColor: "error", snackbarTitle: "" },
-                    react_1.default.createElement(material_1.Stack, null,
-                        react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, error.displayTitle()),
-                        react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayUrl())),
-                    error.displayMessage())));
+            let error = new UnknownServiceError_1.UnknownServiceError(e);
+            if (e instanceof BaseServiceError_1.BaseServiceError) {
+                error = e;
+            }
+            return this.renderError(error.displayTitle(), error.displayUrl(), error.displayMessage());
         })));
+    }
+    renderError(title, url, message) {
+        return (react_1.default.createElement(Toast_1.Toast, { snackbarColor: "error", snackbarTitle: "" },
+            react_1.default.createElement(material_1.Stack, null,
+                react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, title),
+                react_1.default.createElement(material_1.Typography, { variant: "caption" }, url)),
+            message));
     }
 }
 exports.ToastError = ToastError;

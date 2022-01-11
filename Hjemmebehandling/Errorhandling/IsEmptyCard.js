@@ -8,7 +8,7 @@ const material_1 = require("@mui/material");
 const react_2 = __importDefault(require("react"));
 class IsEmptyCard extends react_1.Component {
     render() {
-        const listIsEmpty = this.props.list === undefined || this.props.list.length === 0;
+        const listIsEmpty = this.props.list === undefined || this.props.list === null || this.props.list.length === 0;
         const objectIsUndefined = this.props.object === undefined;
         console.log(listIsEmpty + "-" + objectIsUndefined);
         console.log(this.props.list);

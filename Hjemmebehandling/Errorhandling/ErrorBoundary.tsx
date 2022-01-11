@@ -3,6 +3,8 @@ import React, { ErrorInfo } from "react";
 import { BaseServiceError } from "./BaseServiceError";
 import { InternalServerError } from "./ServiceErrors/InternalServerError";
 import { NotCorrectRightsError } from "./ServiceErrors/NotCorrectRightsError";
+import { UnknownServiceError } from "./ServiceErrors/UnknownServiceError";
+import { UnsupportedError } from "./ServiceErrors/UnsupportedError";
 import { ToastError } from "./ToastError";
 
 export interface Props {
@@ -66,6 +68,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
       return true;
     if (this.state.error instanceof InternalServerError)
       return true;
+    if (this.state.error instanceof UnknownServiceError)
+      return true;
+    if (this.state.error instanceof UnsupportedError)
+      return true;
 
     return false;
   }
@@ -97,7 +103,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         </DialogContent>
 
         <DialogActions>
-          {shouldShowReloadButton ? <Button onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
+          {shouldShowReloadButton ? <Button autoFocus onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
           {shouldShowLogout ? <Button variant="contained" onClick={this.logout}>Log ud</Button> : <></>}
         </DialogActions>
       </Dialog>

@@ -10,7 +10,7 @@ interface Props{
 
 export default class IsEmptyCard extends Component<Props,{}>{
     render() : JSX.Element{
-        const listIsEmpty : boolean = this.props.list === undefined || this.props.list.length === 0
+        const listIsEmpty : boolean = this.props.list === undefined ||this.props.list === null || this.props.list.length === 0
         const objectIsUndefined : boolean = this.props.object === undefined
 
         console.log(listIsEmpty + "-"+objectIsUndefined)
