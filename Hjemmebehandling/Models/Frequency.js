@@ -7,6 +7,7 @@ class Frequency {
     }
     ToString() {
         let toReturn = "";
+        this.days.sort(this.compareDayEnum);
         for (let i = 0; i < this.days.length; i++) {
             if (i !== 0)
                 toReturn += ", ";
@@ -16,6 +17,10 @@ class Frequency {
         toReturn += this.deadline ? " kl " : "";
         toReturn += this.deadline ? this.deadline : "";
         return toReturn;
+    }
+    compareDayEnum(a, b) {
+        const weekdayOrder = [DayEnum.Monday, DayEnum.Tuesday, DayEnum.Wednesday, DayEnum.Thursday, DayEnum.Friday, DayEnum.Saturday, DayEnum.Sunday];
+        return weekdayOrder.indexOf(a) - weekdayOrder.indexOf(b);
     }
 }
 exports.Frequency = Frequency;

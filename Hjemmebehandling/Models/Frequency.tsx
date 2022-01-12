@@ -5,6 +5,7 @@ export class Frequency {
 
     ToString() : string{
         let toReturn = "";
+        this.days.sort(this.compareDayEnum)
         for(let i = 0;i<this.days.length; i++){
             if(i !== 0)
             toReturn += ", "    
@@ -16,6 +17,13 @@ export class Frequency {
         return toReturn;
         
     }
+
+    compareDayEnum(a : DayEnum, b : DayEnum){
+        const weekdayOrder = [DayEnum.Monday,DayEnum.Tuesday,DayEnum.Wednesday,DayEnum.Thursday,DayEnum.Friday,DayEnum.Saturday,DayEnum.Sunday];
+        return weekdayOrder.indexOf(a) - weekdayOrder.indexOf(b)
+    }
+
+    
 }
 
 export enum  FrequencyEnum {
