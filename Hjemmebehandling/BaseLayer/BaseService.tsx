@@ -1,6 +1,7 @@
 import { BaseApiError } from "../Errorhandling/BaseApiError";
 import { BaseServiceError } from "../Errorhandling/BaseServiceError";
 import { BadRequestError } from "../Errorhandling/ServiceErrors/BadRequestError";
+import { GenericApiError } from "../Errorhandling/ServiceErrors/GenericApiError";
 import { InternalServerError } from "../Errorhandling/ServiceErrors/InternalServerError";
 import { InvalidInputError, InvalidInputModel } from "../Errorhandling/ServiceErrors/InvalidInputError";
 import { NotCorrectRightsError } from "../Errorhandling/ServiceErrors/NotCorrectRightsError";
@@ -8,7 +9,23 @@ import { NotFoundError } from "../Errorhandling/ServiceErrors/NotFoundError";
 import { UnknownServiceError } from "../Errorhandling/ServiceErrors/UnknownServiceError";
 
 
+export class StatusCodeMap {
+    statusCode: number;
+    getErrorMethod: (apiError: BaseApiError) => BaseServiceError
+    constructor(statusCode: number, getErrorMethod: (apiError: BaseApiError) => BaseServiceError) {
+        this.statusCode = statusCode;
+        this.getErrorMethod = getErrorMethod;
+    }
+}
+
 export default class BaseService {
+
+    statusCodeToErrorMethod: StatusCodeMap[] = []
+
+    constructor() {
+        this.statusCodeToErrorMethod.push(new StatusCodeMap(400, this.ReturnError400));
+    }
+
     ValidatePagination(page: number, pageSize: number): void {
         let errors: InvalidInputModel[] = [];
         if (page <= 0)
@@ -35,23 +52,36 @@ export default class BaseService {
         throw new UnknownServiceError(error)
     }
 
+    public AddStatusCodeToErrorMap(statusCodeMap: StatusCodeMap) {
+        const existing = this.statusCodeToErrorMethod.findIndex(x => x.statusCode == statusCodeMap.statusCode);
+        if (existing > -1)
+            this.statusCodeToErrorMethod.splice(existing, 1);
+        this.statusCodeToErrorMethod.push(statusCodeMap);
+    }
+
     private FromApiToServiceError(apiError: BaseApiError): BaseServiceError {
         if (apiError && apiError.response) {
-            switch (apiError.response.status) {
-                case 400:
-                    return new BadRequestError(apiError.errorMessage ?? "")
-                case 401:
-                    return new NotCorrectRightsError();
-                case 403:
-                    return new NotCorrectRightsError();
-                case 404:
-                    return new NotFoundError();
-                case 500:
-                    return new InternalServerError();
-            }
+            const matchingStatusMethod = this.statusCodeToErrorMethod.find(x => x.statusCode == apiError.response?.status);
+            if (matchingStatusMethod)
+                return matchingStatusMethod.getErrorMethod(apiError);
         }
 
-        return apiError
+        return new GenericApiError(apiError)
+    }
 
+    ReturnError400(apiError: BaseApiError): BaseServiceError {
+        return new BadRequestError(apiError.errorMessage ?? "")
+    }
+    ReturnError401(apiError: BaseApiError): BaseServiceError {
+        return new NotCorrectRightsError();
+    }
+    ReturnError403(apiError: BaseApiError): BaseServiceError {
+        return new NotCorrectRightsError();
+    }
+    ReturnError404(apiError: BaseApiError): BaseServiceError {
+        return new NotFoundError();
+    }
+    ReturnError500(apiError: BaseApiError): BaseServiceError {
+        return new InternalServerError();
     }
 }

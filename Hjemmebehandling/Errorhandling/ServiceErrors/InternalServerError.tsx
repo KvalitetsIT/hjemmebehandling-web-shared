@@ -1,4 +1,4 @@
-import { BaseServiceError } from "../BaseServiceError";
+import { BaseServiceError, DisplaySettings } from "../BaseServiceError";
 
 export class InternalServerError extends BaseServiceError {
     displayMessage() {
@@ -6,5 +6,10 @@ export class InternalServerError extends BaseServiceError {
     }
     displayTitle(){
         return "Intern server fejl"
+    }
+    displaySettings(): DisplaySettings {
+        const settings = new DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
     }
 }

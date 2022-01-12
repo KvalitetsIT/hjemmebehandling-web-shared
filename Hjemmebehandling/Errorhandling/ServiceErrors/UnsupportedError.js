@@ -17,5 +17,10 @@ class UnsupportedError extends BaseServiceError_1.BaseServiceError {
     displayUrl() {
         return JSON.stringify(this.concerningObject);
     }
+    displaySettings() {
+        const settings = new BaseServiceError_1.DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
+    }
 }
 exports.UnsupportedError = UnsupportedError;

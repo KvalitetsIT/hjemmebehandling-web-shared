@@ -6,10 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ErrorBoundary = void 0;
 const material_1 = require("@mui/material");
 const react_1 = __importDefault(require("react"));
-const InternalServerError_1 = require("./ServiceErrors/InternalServerError");
-const NotCorrectRightsError_1 = require("./ServiceErrors/NotCorrectRightsError");
-const UnknownServiceError_1 = require("./ServiceErrors/UnknownServiceError");
-const UnsupportedError_1 = require("./ServiceErrors/UnsupportedError");
+const BaseServiceError_1 = require("./BaseServiceError");
 const ToastError_1 = require("./ToastError");
 class ErrorBoundary extends react_1.default.Component {
     constructor(props) {
@@ -41,14 +38,8 @@ class ErrorBoundary extends react_1.default.Component {
         return (react_1.default.createElement(react_1.default.Fragment, null, this.props.children));
     }
     shouldBeLargeError() {
-        if (this.state.error instanceof NotCorrectRightsError_1.NotCorrectRightsError)
-            return true;
-        if (this.state.error instanceof InternalServerError_1.InternalServerError)
-            return true;
-        if (this.state.error instanceof UnknownServiceError_1.UnknownServiceError)
-            return true;
-        if (this.state.error instanceof UnsupportedError_1.UnsupportedError)
-            return true;
+        if (this.state.error instanceof BaseServiceError_1.BaseServiceError)
+            return this.state.error.displaySettings().displayInLargeDialog;
         return false;
     }
     logout() {
@@ -59,8 +50,8 @@ class ErrorBoundary extends react_1.default.Component {
     }
     renderLargeError() {
         const error = this.state.error;
-        const shouldShowLogout = error instanceof NotCorrectRightsError_1.NotCorrectRightsError;
-        const shouldShowReloadButton = true;
+        const shouldShowReloadButton = error.displaySettings().showRefreshButton;
+        const shouldShowLogout = error.displaySettings().showLogoutButton;
         return (react_1.default.createElement(material_1.Dialog, { fullWidth: true, open: true },
             react_1.default.createElement(material_1.DialogTitle, { id: "alert-dialog-title" },
                 react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, error.displayTitle()),

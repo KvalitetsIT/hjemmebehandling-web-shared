@@ -64,15 +64,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   shouldBeLargeError(): boolean {
-    if (this.state.error instanceof NotCorrectRightsError)
-      return true;
-    if (this.state.error instanceof InternalServerError)
-      return true;
-    if (this.state.error instanceof UnknownServiceError)
-      return true;
-    if (this.state.error instanceof UnsupportedError)
-      return true;
-
+    if (this.state.error instanceof BaseServiceError)
+      return this.state.error.displaySettings().displayInLargeDialog
     return false;
   }
   logout(): void {
@@ -84,8 +77,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   renderLargeError() {
     const error = this.state.error as BaseServiceError
-    const shouldShowLogout = error instanceof NotCorrectRightsError;
-    const shouldShowReloadButton = true;
+    const shouldShowReloadButton = error.displaySettings().showRefreshButton;
+    const shouldShowLogout = error.displaySettings().showLogoutButton;
+
 
     return (
       <Dialog fullWidth open={true}>

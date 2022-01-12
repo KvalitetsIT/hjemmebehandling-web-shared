@@ -16,5 +16,10 @@ class UnknownServiceError extends BaseServiceError_1.BaseServiceError {
         message += "Der skete en ukendt fejl";
         return message;
     }
+    displaySettings() {
+        const settings = new BaseServiceError_1.DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
+    }
 }
 exports.UnknownServiceError = UnknownServiceError;

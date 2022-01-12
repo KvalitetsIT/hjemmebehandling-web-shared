@@ -1,4 +1,4 @@
-import { BaseServiceError } from "../BaseServiceError";
+import { BaseServiceError, DisplaySettings } from "../BaseServiceError";
 
 export class UnknownServiceError extends BaseServiceError  {
     error : any;
@@ -15,5 +15,10 @@ export class UnknownServiceError extends BaseServiceError  {
         let message = "";
         message += "Der skete en ukendt fejl"
         return message;
+    }
+    displaySettings(): DisplaySettings {
+        const settings = new DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
     }
 }

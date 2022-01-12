@@ -9,5 +9,10 @@ class InternalServerError extends BaseServiceError_1.BaseServiceError {
     displayTitle() {
         return "Intern server fejl";
     }
+    displaySettings() {
+        const settings = new BaseServiceError_1.DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
+    }
 }
 exports.InternalServerError = InternalServerError;

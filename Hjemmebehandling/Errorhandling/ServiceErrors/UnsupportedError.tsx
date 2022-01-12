@@ -1,4 +1,4 @@
-import { BaseServiceError } from "../BaseServiceError"
+import { BaseServiceError, DisplaySettings } from "../BaseServiceError"
 
 export class UnsupportedError extends BaseServiceError {
     concerningObject: unknown
@@ -20,5 +20,10 @@ export class UnsupportedError extends BaseServiceError {
 
     displayUrl(): string {
         return JSON.stringify(this.concerningObject);
+    }
+    displaySettings(): DisplaySettings {
+        const settings = new DisplaySettings();
+        settings.displayInLargeDialog = true;
+        return settings;
     }
 }
