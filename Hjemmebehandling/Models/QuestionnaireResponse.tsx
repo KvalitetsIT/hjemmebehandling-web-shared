@@ -10,6 +10,7 @@ export class QuestionnaireResponse {
     //measurements! : Map<MeasurementType,Measurement>
     questions? : Map<Question,Answer>;
     answeredTime! : Date | undefined ;
+    examinedTime! : Date | undefined ;
     status! : QuestionnaireResponseStatus
     category! : CategoryEnum;
     patient! : PatientSimple
