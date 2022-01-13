@@ -11,6 +11,7 @@ import InsertChartIcon from '@mui/icons-material/InsertChart';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { ThresholdNumber } from '../Models/ThresholdNumber';
 import IDateHelper from '../Helpers/interfaces/IDateHelper';
+import "../Helpers/extensionMethods/Date"
 
 export enum DisplayModeEnum {
   GRAPH = "Graf",
@@ -22,7 +23,7 @@ export interface Props {
   questionnaireResponses: QuestionnaireResponse[]
   thresholds: ThresholdNumber[]
   minimal: boolean;
-  dateToString: (date : Date) => string;
+  dateToString: (date: Date) => string;
 }
 
 export interface State {
@@ -33,7 +34,7 @@ export class QuestionChart extends Component<Props, State> {
   static displayName = QuestionChart.name;
   static defaultProps = {
     minimal: false,
-    dateToString : (date : Date) => date.toLocaleDateString()
+    dateToString: (date: Date) => date.toLocaleDateString()
   }
 
   dateHelper!: IDateHelper
@@ -130,15 +131,15 @@ export class QuestionChart extends Component<Props, State> {
     //Remove all the legends for the thresholdvalues (since we are only interested in the question being a legend)
     const q = this.props.question.question
     const options = {
-      scales : {
-        y : {
-          ticks : {
-            display : !this.props.minimal
+      scales: {
+        y: {
+          ticks: {
+            display: !this.props.minimal
           }
         },
         x: {
-          ticks : {
-            display : !this.props.minimal
+          ticks: {
+            display: !this.props.minimal
           }
         }
       },
@@ -152,8 +153,8 @@ export class QuestionChart extends Component<Props, State> {
         }
       }
     }
-    let plugins : any[] = []
-    if(!this.props.minimal){
+    let plugins: any[] = []
+    if (!this.props.minimal) {
       plugins = [ChartDataLabels as any]
     }
 
@@ -183,9 +184,13 @@ export class QuestionChart extends Component<Props, State> {
       </>
     )
   }
+
+
+
   render(): JSX.Element {
 
     const questionnaireResponses = this.props.questionnaireResponses;
+    questionnaireResponses.sort((a, b) => a.answeredTime && b.answeredTime ? a.answeredTime.compareTo(b.answeredTime) : 0)
     const question = this.props.question;
 
     const answersData: number[] = [] //Contains all numbers that should be shown in chart

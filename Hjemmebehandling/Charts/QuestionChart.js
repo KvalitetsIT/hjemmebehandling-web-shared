@@ -31,6 +31,7 @@ const chartjs_plugin_datalabels_1 = __importDefault(require("chartjs-plugin-data
 const material_1 = require("@mui/material");
 const InsertChart_1 = __importDefault(require("@mui/icons-material/InsertChart"));
 const TableRows_1 = __importDefault(require("@mui/icons-material/TableRows"));
+require("../Helpers/extensionMethods/Date");
 var DisplayModeEnum;
 (function (DisplayModeEnum) {
     DisplayModeEnum["GRAPH"] = "Graf";
@@ -158,6 +159,7 @@ class QuestionChart extends react_1.Component {
     }
     render() {
         const questionnaireResponses = this.props.questionnaireResponses;
+        questionnaireResponses.sort((a, b) => a.answeredTime && b.answeredTime ? a.answeredTime.compareTo(b.answeredTime) : 0);
         const question = this.props.question;
         const answersData = []; //Contains all numbers that should be shown in chart
         const answersLabels = []; // Contains the x-axes values (dates)

@@ -20,7 +20,11 @@ exports.StatusCodeMap = StatusCodeMap;
 class BaseService {
     constructor() {
         this.statusCodeToErrorMethod = [];
-        this.statusCodeToErrorMethod.push(new StatusCodeMap(400, this.ReturnError400));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(400, this.ReturnError400));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(401, this.ReturnError401));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(403, this.ReturnError403));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(404, this.ReturnError404));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(500, this.ReturnError500));
     }
     ValidatePagination(page, pageSize) {
         let errors = [];
