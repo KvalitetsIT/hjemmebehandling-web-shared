@@ -45,14 +45,19 @@ class QuestionChart extends react_1.Component {
         };
     }
     getChipColorFromCategory(category) {
+        if (!this.props.showThresholds)
+            return "rgba(75,192,192,0)";
+        const greenLight = '#D0EFDC';
+        const yellowLight = '#FFEFD0';
+        const redLight = '#FAD8D7';
         const transparency = 1;
         if (category === CategoryEnum_1.CategoryEnum.RED)
-            return "#EE6969";
+            return redLight;
         if (category === CategoryEnum_1.CategoryEnum.YELLOW)
-            return "#FFD78C";
+            return yellowLight;
         if (category === CategoryEnum_1.CategoryEnum.BLUE)
             return "rgba(75,192,192," + transparency + ")";
-        return "#61BD84";
+        return greenLight;
     }
     getDisplayNameFromCategory(category) {
         if (category === CategoryEnum_1.CategoryEnum.RED)
@@ -84,7 +89,7 @@ class QuestionChart extends react_1.Component {
                 label: this.getDisplayNameFromCategory(threshold.category) + " (min)",
                 data: dataFrom,
                 pointRadius: 1,
-                fill: false,
+                fill: true,
                 datalabels: {
                     color: 'rgba(0,100,200,0)'
                 },
@@ -98,7 +103,7 @@ class QuestionChart extends react_1.Component {
                 label: this.getDisplayNameFromCategory(threshold.category) + " (max)",
                 data: dataTo,
                 pointRadius: 1,
-                fill: false,
+                fill: true,
                 datalabels: {
                     color: 'rgba(0,100,200,0)'
                 },
@@ -184,8 +189,8 @@ class QuestionChart extends react_1.Component {
                 clip: false //if true, data will be removed if outside the chart-area
             },
             pointRadius: 5,
-            backgroundColor: "rgba(0,100,200,1)",
-            borderColor: "rgba(0,100,200,1)",
+            backgroundColor: "black",
+            borderColor: "black",
             order: -99999 //If order is lowest, the line will be in front of other lines
         });
         this.createThresholdDataset(question, questionnaireResponses.length).forEach(x => dataSets.push(x));
@@ -217,5 +222,6 @@ exports.QuestionChart = QuestionChart;
 QuestionChart.displayName = QuestionChart.name;
 QuestionChart.defaultProps = {
     minimal: false,
+    showThresholds: true,
     dateToString: (date) => date.toLocaleDateString()
 };

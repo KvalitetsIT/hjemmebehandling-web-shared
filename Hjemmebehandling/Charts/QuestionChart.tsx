@@ -22,6 +22,7 @@ export interface Props {
   question: Question
   questionnaireResponses: QuestionnaireResponse[]
   thresholds: ThresholdNumber[]
+  showThresholds: boolean
   minimal: boolean;
   dateToString: (date: Date) => string;
 }
@@ -34,6 +35,7 @@ export class QuestionChart extends Component<Props, State> {
   static displayName = QuestionChart.name;
   static defaultProps = {
     minimal: false,
+    showThresholds: true,
     dateToString: (date: Date) => date.toLocaleDateString()
   }
 
@@ -48,15 +50,24 @@ export class QuestionChart extends Component<Props, State> {
   }
 
   getChipColorFromCategory(category: CategoryEnum): string {
+    if(!this.props.showThresholds)
+      return "rgba(75,192,192,0)";
+
+    const greenLight = '#D0EFDC'
+
+    const yellowLight = '#FFEFD0'
+
+    const redLight = '#FAD8D7'
+
     const transparency = 1
     if (category === CategoryEnum.RED)
-      return "#EE6969"
+      return redLight
     if (category === CategoryEnum.YELLOW)
-      return "#FFD78C"
+      return yellowLight
     if (category === CategoryEnum.BLUE)
       return "rgba(75,192,192," + transparency + ")"
 
-    return "#61BD84"
+    return greenLight
 
   }
 
@@ -96,7 +107,7 @@ export class QuestionChart extends Component<Props, State> {
         label: this.getDisplayNameFromCategory(threshold.category) + " (min)",
         data: dataFrom,
         pointRadius: 1,
-        fill: false,
+        fill: true,
         datalabels: {
           color: 'rgba(0,100,200,0)'
         },
@@ -112,7 +123,7 @@ export class QuestionChart extends Component<Props, State> {
         label: this.getDisplayNameFromCategory(threshold.category) + " (max)",
         data: dataTo,
         pointRadius: 1,
-        fill: false,
+        fill: true,
         datalabels: {
           color: 'rgba(0,100,200,0)'
         },
@@ -224,8 +235,8 @@ export class QuestionChart extends Component<Props, State> {
         clip: false //if true, data will be removed if outside the chart-area
       },
       pointRadius: 5,
-      backgroundColor: "rgba(0,100,200,1)", // point color
-      borderColor: "rgba(0,100,200,1)",
+      backgroundColor: "black", // point color
+      borderColor: "black",
       order: -99999 //If order is lowest, the line will be in front of other lines
     })
 
