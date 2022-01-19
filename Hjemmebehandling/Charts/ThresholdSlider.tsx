@@ -12,7 +12,6 @@ export interface Props {
     threshold: ThresholdNumber[]
 }
 
-
 export class ThresholdSlider extends Component<Props, {}> {
     static displayName = ThresholdSlider.name;
 
@@ -60,18 +59,29 @@ export class ThresholdSlider extends Component<Props, {}> {
     render(): JSX.Element {
         let oldTo: number | undefined = undefined;
 
+        let totalWidth : number = 0;
+        this.props.threshold.forEach( threshold => {
+            const to = threshold.to ?? 100;
+            const from = threshold.from ?? -100;
+            totalWidth += to - from
+        })
+
         return (
             <Stack direction="row">
                 {this.props.threshold.sort(this.compareThresholdNumbers).map(x => {
                     const shouldShowNewFrom = oldTo !== x.from;
-
                     oldTo = x.to;
 
+                    const to = x.to ?? 100;
+                    const from = x.from ?? 100;
+
+                    let size = (to - from)/totalWidth*100;
+                 
                     return (
                         <>
                             {shouldShowNewFrom ? <Typography variant="caption" padding={1}>{x.from}</Typography> : <></>}
 
-                            <Chip className='darkColor' width={100 / this.props.threshold.length + "%"} component={Box} sx={{ height: 10 }} color={this.getColorFromCategory(x.category)} />
+                            <Chip className='darkColor' width={size+"%"} component={Box} sx={{ height: 10 }} color={this.getColorFromCategory(x.category)} />
                             <Typography variant="caption" padding={1}>{x.to}</Typography>
                         </>
                     )

@@ -16,23 +16,18 @@ export default class DanishDateHelper implements IDateHelper {
         return toReturn;
     }
 
+    days = [
+        DayEnum.Sunday,
+        DayEnum.Monday,
+        DayEnum.Tuesday,
+        DayEnum.Wednesday,
+        DayEnum.Thursday,
+        DayEnum.Friday,
+        DayEnum.Saturday
+    ]
+    
     DayIndexToDay(dayIndex: number): DayEnum {
-        if (dayIndex === 0)
-            return DayEnum.Sunday
-        if (dayIndex === 1)
-            return DayEnum.Monday
-        if (dayIndex === 2)
-            return DayEnum.Tuesday
-        if (dayIndex === 3)
-            return DayEnum.Wednesday
-        if (dayIndex === 4)
-            return DayEnum.Thursday
-        if (dayIndex === 5)
-            return DayEnum.Friday
-        if (dayIndex === 6)
-            return DayEnum.Saturday
-
-        throw Error("dayIndex was not in range 0 <= x <= 6");
+        return this.days[dayIndex];
     }
 
 

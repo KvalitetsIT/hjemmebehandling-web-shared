@@ -34,7 +34,7 @@ export class QuestionChart extends Component<Props, {}> {
             display: !this.props.minimal
           },
           grid: {
-            display: true,
+            display: !this.props.minimal,
 
           }
         },

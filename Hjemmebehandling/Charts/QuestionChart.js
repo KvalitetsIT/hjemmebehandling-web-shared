@@ -37,7 +37,7 @@ class QuestionChart extends react_1.Component {
                         display: !this.props.minimal
                     },
                     grid: {
-                        display: true,
+                        display: !this.props.minimal,
                     }
                 },
                 x: {

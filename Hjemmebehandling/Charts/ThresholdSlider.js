@@ -65,12 +65,23 @@ class ThresholdSlider extends react_1.Component {
     }
     render() {
         let oldTo = undefined;
+        let totalWidth = 0;
+        this.props.threshold.forEach(threshold => {
+            var _a, _b;
+            const to = (_a = threshold.to) !== null && _a !== void 0 ? _a : 100;
+            const from = (_b = threshold.from) !== null && _b !== void 0 ? _b : -100;
+            totalWidth += to - from;
+        });
         return (React.createElement(material_1.Stack, { direction: "row" }, this.props.threshold.sort(this.compareThresholdNumbers).map(x => {
+            var _a, _b;
             const shouldShowNewFrom = oldTo !== x.from;
             oldTo = x.to;
+            const to = (_a = x.to) !== null && _a !== void 0 ? _a : 100;
+            const from = (_b = x.from) !== null && _b !== void 0 ? _b : 100;
+            let size = (to - from) / totalWidth * 100;
             return (React.createElement(React.Fragment, null,
                 shouldShowNewFrom ? React.createElement(material_1.Typography, { variant: "caption", padding: 1 }, x.from) : React.createElement(React.Fragment, null),
-                React.createElement(material_1.Chip, { className: 'darkColor', width: 100 / this.props.threshold.length + "%", component: Box_1.default, sx: { height: 10 }, color: this.getColorFromCategory(x.category) }),
+                React.createElement(material_1.Chip, { className: 'darkColor', width: size + "%", component: Box_1.default, sx: { height: 10 }, color: this.getColorFromCategory(x.category) }),
                 React.createElement(material_1.Typography, { variant: "caption", padding: 1 }, x.to)));
         })));
     }

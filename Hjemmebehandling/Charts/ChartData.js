@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const CategoryEnum_1 = require("../Models/CategoryEnum");
+require("../Helpers/extensionMethods/Date");
 class ChartData {
     constructor(questionnaireResponses, question, thresholdCollection, dateToString) {
         this.answerData = [];
