@@ -2,11 +2,11 @@
 `npm i @kvalitetsit/hjemmebehandling`
 
 # Publishing to npm;
-1. Change versionnumber in package.json
-1. `npm login` and login with your credentials 
-1. Make sure you are included in the kvalitetsit-organization in npm https://www.npmjs.com/settings/kvalitetsit/members'
-1. Make sure you are the right place `cd Hjemmebehandling`
-1. Publish to npm using command `npm run-script publish`
+1. Change versionnumber in package.json `1.9 => 1.10 => 1.11 ... `
+3. `npm login` and login with your credentials 
+4. Make sure you are included in the kvalitetsit-organization in npm https://www.npmjs.com/settings/kvalitetsit/members'
+5. Make sure you are the right place `cd Hjemmebehandling`
+6. Publish to npm using command `npm run-script publish`
 
 # Technologies in use
 ## General
