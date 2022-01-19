@@ -1,3 +1,10 @@
+## The Communication and monitoring project (KoMo)
+Image a person called Jens. Jens has a condition. His condition makes it nessecary to have his health monitored. He does not need to be monitored 24/7, he just needs to answer and send a questionnaire a couple times a week to the doctor, so the doctor can tell if his condition is getting worse.
+
+> Jens will have to send theese questionnaires somewhere, and this is where [patient-web](https://github.com/KvalitetsIT/hjemmebehandling-patient-web) comes ind. Here Jens will log in, and get an overview of his condition, how it evolves, and also give him the ability to tell the doctor how it goes, using a questionnaire. The patient-web will also provide Jens with contact-details for the hospital, at relevant and urgent times.
+
+> The doctor will recieve the questionnaire using the [medarbejder-web](https://github.com/KvalitetsIT/hjemmebehandling-medarbejder-web) where he will be able to quickly see whether Jens' health is going the right or the wrong way. If Jens is getting worse, a form of communication will be performed, either on Jens' initiative or the doctors. 
+
 # Instaling package
 `npm i @kvalitetsit/hjemmebehandling`
 
