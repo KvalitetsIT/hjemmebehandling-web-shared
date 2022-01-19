@@ -28,8 +28,37 @@
 1. Visual Studio Code
 
 
+# Structuring for projects using shared
+When standing in the root-folder of a project that is using the shared project, there are a few folders that are more important than others.
 
-# Structuring
+## Components-folder
+In the components folder we store all of our components. Usually we have split the components into categories based on their root-component. Many times fx we use the MUI-component `card` as our root. And when that is the case we put it in the `Cards`-folder.
+
+Furthermore we always have a `layout`-folder which contains components used to setup the basic layoutting. We usually have a `layout.tsx` which uses Router and Switch, and other components to compose the general layout of the page. It is also here where we store elements that are used general across the application, such as loading-components and such.
+
+## Pages-folder
+The page-folder contains all the actual pages, where we use components to compose the entire page. Theese pages should not be the longest of files, and should not be much more than 200 lines. If the file is more than 200 lines, it could indicate the need of refactoring code into more componenents.
+
+The pages are named after the path that are used to get to them. So fx :
+
+`{url}` => `{filePlacement}` \
+`www.mydomain.com/create` => `pages/create.tsx` \
+`www.mydomain.com/patients/2` => `pages/patients/[pagenr].tsx` \
+`www.mydomain.com/2/patients` => `pages/[pagenr]/patients.tsx`
+
+This is convention in Next, and will make the properties in `[]` available in the property-object on the related page.
+
+## Services-folder
+The services-folder contains all of the interfaces for our services, and their implementation. It also contains all the project-specific serviceerrors which can be thrown in the service-layer.
+
+
+## Apis-folder
+The api-folder contains all of the interfaces for our apis, and their implementations (one "real" that calls the actual api, and one "fake" which mocks the entire connection). It also contains all the project-specific apierrors which can be thrown in the api-layer.
+
+## Compose-folder
+In the projects we have a docker-compose setup that can be run, and that setup is stored here.
+
+# Structuring for shared-project
 
 ## Charts
 In this project we use one type of graph, the line chart. So to make it easy to use the same graph across both projects, all we need to create that graph is placed in this folder.
