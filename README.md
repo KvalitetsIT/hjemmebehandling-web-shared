@@ -32,7 +32,10 @@
 # Structuring
 
 ## Charts
-In this project we only need one type of graph, and therefore we store that here.
+In this project we use one type of graph, the line chart. So to make it easy to use the same graph across both projects, all we need to create that graph is placed in this folder.
+
+## Helpers
+In the Helpers-folder we have placed different kinds of helpers, from a Date-extension-method, to a collection-helper and also a datehelper. The dateHelper should be used every time a date is rendered in the UI. This is to make sure, that we show dates the samme way across every project. 
 
 ## Errorhandling
 ### Errortypes
@@ -46,10 +49,12 @@ To catch and handle errors from the DOM, best practise is to use ErrorBoundaries
 Often in the frontend we will be met with "This value is possibly undefined". To make it easier we have created an IsEmptyCard. This can take a list, or and object and display whatever you want if the list, or object is empty, null or undefined. If you have DOM that expects the list, or object to have a value, you can set that DOM as a child of the IsEmptyCard. And this part will only be rendered if the list, or object is not null, empty or undefined.
 
 ## Models
-Since it is the same domain-models that are used across all systems, all the domain models are stored here.
+Since all projects using this package are attached to same project, we are all in the same domain. The models in this domain are therefor in this shared project.
 
 ## BaseLayer
 Usually we have a Service-layer, API-layer and the frontend layer. This folder stores classes that contains methods that could (and should) be used in all specifications of a given service or api-class.
+
+For API -and servicelayer we have created two base-clases, which all service-implementations should inherit from. This will make common methods, such as HandleError(...) accessable.
 
 ### API-layer
 > Any classes in the api-layer should inherit from the baseclass BaseApi
@@ -99,22 +104,6 @@ try{
 }
 ```
 This will trigger the ErrorBoundary-component which will show the error in a pretty way. The ErrorBoundary is created to handle only ServiceError's. Read more on errorboundaries here https://reactjs.org/docs/error-boundaries.html
-
-
-### BaseLayer
-For API -and servicelayer we have created two base-clases, which all service-implementations should inherit from. This will make common methods, such as ValidatePagination(...) and HandleError(...) accessable. And theese methods should be used as much as possible.
-
-### Charts
-In this project we use one type of graph, the line chart. So to make it easy to use the same graph across both projects, all we need to create that graph is placed in this folder.
-
-### Errorhandling
-In the errorhandling section we have classes of different character. Some is used to catch erros, and render them nicely. Others are common errors that could be used in the projects. 
-
-### Helpers
-In the Helpers-folder we have placed different kinds of helpers, from a Date-extension-method, to a collection-helper and also a datehelper. The dateHelper should be used every time a date is rendered in the UI. This is to make sure, that we show dates the samme way across every project. 
-
-### Models
-Since all projects using this package are attached to same project, we are all in the same domain. The models in this domain are therefor in this shared project.
 
 # Technical decisions
 
