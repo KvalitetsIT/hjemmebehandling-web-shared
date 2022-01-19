@@ -2,7 +2,7 @@ import { IComparable } from "./Interfaces/IComparable";
 
 export class Question implements IComparable<Question>{
     isEqual(other: Question) : boolean{
-        return this.question === other.question;
+        return this.Id === other.Id;
     }
     Id! : string
     question! : string

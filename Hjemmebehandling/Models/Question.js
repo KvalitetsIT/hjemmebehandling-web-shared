@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuestionTypeEnum = exports.Question = void 0;
 class Question {
     isEqual(other) {
-        return this.question === other.question;
+        return this.Id === other.Id;
     }
 }
 exports.Question = Question;
