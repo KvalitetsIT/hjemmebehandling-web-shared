@@ -41,11 +41,9 @@ class ChartData {
     getThresholdDatasets(showThresholds) {
         var _a, _b;
         const datasets = [];
-        console.log("thresholds:");
-        console.log(this.thresholdCollection);
+        let isFirstIteration = true;
         if (!((_a = this.thresholdCollection) === null || _a === void 0 ? void 0 : _a.thresholdNumbers))
             return [];
-        console.log("thresholds:");
         (_b = this.thresholdCollection) === null || _b === void 0 ? void 0 : _b.thresholdNumbers.forEach(threshold => {
             const dataFrom = [];
             const dataTo = [];
@@ -56,6 +54,28 @@ class ChartData {
                 if (!(threshold.to === undefined)) {
                     dataTo.push(threshold.to);
                 }
+            }
+            //First iteration is expected to have the lowest from-value
+            //https://nextstepcitizen.atlassian.net/browse/RIM-493
+            //When a value is below the defined area of thresholds
+            //The value should have white background, and not the 
+            //same background as the one with lowest from-value
+            if (isFirstIteration) {
+                isFirstIteration = false;
+                //First create the from-line
+                const whiteDataset = {
+                    label: "white",
+                    data: dataFrom,
+                    pointRadius: 1,
+                    fill: true,
+                    datalabels: {
+                        color: "rgba(0,100,200,0)"
+                    },
+                    order: -888,
+                    backgroundColor: "white",
+                    borderColor: this.getChipColorFromCategory(threshold.category, showThresholds)
+                };
+                datasets.push(whiteDataset);
             }
             //For each threshold, we add two lines; from and to
             //First create the from-line
@@ -87,7 +107,6 @@ class ChartData {
             };
             datasets.push(toDataset);
         });
-        console.log(datasets);
         //Return the from and to line
         return datasets;
     }
@@ -115,8 +134,10 @@ class ChartData {
             if (response && response.questions) {
                 const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id == question.Id);
                 const answer = response.questions.get(questionnaireQuestion);
-                this.answerData.push(answer.answer);
-                this.answerLabels.push(this.dateToString(response.answeredTime));
+                if (answer.answer != undefined) {
+                    this.answerData.push(answer.answer);
+                    this.answerLabels.push(this.dateToString(response.answeredTime));
+                }
             }
         }
     }

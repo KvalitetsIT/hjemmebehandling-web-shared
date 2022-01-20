@@ -30,6 +30,7 @@ export class QuestionChart extends Component<Props, {}> {
 
       scales: {
         y: {
+          offset: true,
           ticks: {
             display: !this.props.minimal
           },

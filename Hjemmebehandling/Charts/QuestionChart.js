@@ -33,6 +33,7 @@ class QuestionChart extends react_1.Component {
         const options = {
             scales: {
                 y: {
+                    offset: true,
                     ticks: {
                         display: !this.props.minimal
                     },

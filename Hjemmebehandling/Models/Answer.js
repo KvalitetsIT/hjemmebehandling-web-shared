@@ -9,9 +9,11 @@ class StringAnswer {
 exports.StringAnswer = StringAnswer;
 class NumberAnswer {
     ToString() {
+        let toReturn = "";
+        toReturn += this.answer == undefined ? "" : this.answer;
         if (this.unit)
-            return this.answer ? this.answer + " " + this.unit.toString() : "";
-        return this.answer ? this.answer + "" : "";
+            toReturn += " " + this.unit.toString();
+        return toReturn;
     }
 }
 exports.NumberAnswer = NumberAnswer;

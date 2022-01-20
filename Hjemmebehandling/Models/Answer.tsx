@@ -4,7 +4,7 @@ export interface Answer{
 
 export class StringAnswer implements Answer{
     
-    answer! : string
+    answer? : string
     ToString() : string {
 
         return this.answer ? this.answer : "" 
@@ -12,14 +12,17 @@ export class StringAnswer implements Answer{
 }
 
 export class NumberAnswer implements Answer {
-    answer! : number
-    unit! : UnitType
+    answer? : number
+    unit? : UnitType
     
     ToString() : string {
+        let toReturn = "";
+        toReturn += this.answer == undefined ? "" : this.answer;
+
         if(this.unit)
-            return this.answer ? this.answer + " " + this.unit.toString() : "" 
+            toReturn += " " + this.unit.toString()
         
-        return this.answer ? this.answer + "" : "" 
+        return toReturn
     }
 }
 

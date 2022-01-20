@@ -80,13 +80,14 @@ export default class ChartData {
 
     getThresholdDatasets(showThresholds: boolean) {
         const datasets: Dataset[] = [];
-        console.log("thresholds:")
-        console.log(this.thresholdCollection)
+        let isFirstIteration = true;
+
         if (!this.thresholdCollection?.thresholdNumbers)
-        return []
-        
-        console.log("thresholds:")
+            return []
+
         this.thresholdCollection?.thresholdNumbers.forEach(threshold => {
+
+
             const dataFrom = [];
             const dataTo = [];
 
@@ -99,6 +100,28 @@ export default class ChartData {
                 }
             }
 
+            //First iteration is expected to have the lowest from-value
+            //https://nextstepcitizen.atlassian.net/browse/RIM-493
+            //When a value is below the defined area of thresholds
+            //The value should have white background, and not the 
+            //same background as the one with lowest from-value
+            if (isFirstIteration) {
+                isFirstIteration = false;
+                //First create the from-line
+                const whiteDataset: Dataset = {
+                    label: "white",
+                    data: dataFrom,
+                    pointRadius: 1,
+                    fill: true,
+                    datalabels: {
+                        color: "rgba(0,100,200,0)"
+                    },
+                    order: -888,
+                    backgroundColor: "white",
+                    borderColor: this.getChipColorFromCategory(threshold.category, showThresholds)
+                }
+                datasets.push(whiteDataset)
+            }
             //For each threshold, we add two lines; from and to
 
             //First create the from-line
@@ -133,7 +156,6 @@ export default class ChartData {
             }
             datasets.push(toDataset)
         })
-console.log(datasets)
         //Return the from and to line
         return datasets
     }
@@ -165,9 +187,13 @@ console.log(datasets)
             if (response && response.questions) {
                 const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id == question.Id);
                 const answer = response.questions.get(questionnaireQuestion!) as NumberAnswer
-
-                this.answerData.push(answer.answer)
-                this.answerLabels.push(this.dateToString(response.answeredTime!))
+                
+                if(answer.answer != undefined){
+                    this.answerData.push(answer.answer)
+                    this.answerLabels.push(this.dateToString(response.answeredTime!))
+                }
+                
+                
             }
         }
     }
