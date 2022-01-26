@@ -10,10 +10,9 @@ class IsEmptyCard extends react_1.Component {
     render() {
         const listIsEmpty = this.props.list === undefined || this.props.list === null || this.props.list.length === 0;
         const objectIsUndefined = this.props.object === undefined;
-        console.log(listIsEmpty + "-" + objectIsUndefined);
-        console.log(this.props.list);
-        console.log(this.props.object);
         if (listIsEmpty && objectIsUndefined) {
+            if (this.props.useRawJsxWhenEmpty)
+                return react_2.default.createElement(react_2.default.Fragment, null, this.props.jsxWhenEmpty);
             return (react_2.default.createElement(material_1.Card, null,
                 react_2.default.createElement(material_1.CardContent, null,
                     react_2.default.createElement(material_1.Typography, null, this.props.jsxWhenEmpty))));
@@ -22,3 +21,6 @@ class IsEmptyCard extends react_1.Component {
     }
 }
 exports.default = IsEmptyCard;
+IsEmptyCard.defaultProps = {
+    useRawJsxWhenEmpty: false
+};
