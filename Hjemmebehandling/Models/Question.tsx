@@ -1,16 +1,20 @@
+import { EnableWhen } from "./EnableWhen";
 import { IComparable } from "./Interfaces/IComparable";
 
 export class Question implements IComparable<Question>{
-    isEqual(other: Question) : boolean{
+    isEqual(other: Question): boolean {
         return this.Id === other.Id;
     }
-    Id! : string
-    question! : string
-    type! : QuestionTypeEnum
+    Id!: string
+    question!: string
+    type!: QuestionTypeEnum
     options?: Array<string>;
+    enableWhen?: EnableWhen<boolean>
 }
 
-export enum QuestionTypeEnum{
+
+
+export enum QuestionTypeEnum {
     CHOICE = 'CHOICE',
     BOOLEAN = 'BOOLEAN',
     INTEGER = 'INTEGER',
