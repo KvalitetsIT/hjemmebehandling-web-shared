@@ -5,9 +5,10 @@ export class Question implements IComparable<Question>{
     isEqual(other: Question): boolean {
         return this.Id === other.Id;
     }
-    Id!: string
-    question!: string
-    type!: QuestionTypeEnum
+    Id?: string
+    question?: string
+    helperText?: string
+    type?: QuestionTypeEnum
     options?: Array<string>;
     enableWhen?: EnableWhen<boolean>
 }

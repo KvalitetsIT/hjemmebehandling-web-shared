@@ -4,9 +4,10 @@ const CategoryEnum_1 = require("../Models/CategoryEnum");
 require("../Helpers/extensionMethods/Date");
 class ChartData {
     constructor(questionnaireResponses, question, thresholdCollection, dateToString) {
+        var _a;
         this.answerData = [];
         this.answerLabels = [];
-        this.label = question.question;
+        this.label = (_a = question.question) !== null && _a !== void 0 ? _a : "";
         this.thresholdCollection = thresholdCollection;
         this.numberOfResponses = questionnaireResponses.length;
         this.dateToString = dateToString;
