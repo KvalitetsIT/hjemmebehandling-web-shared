@@ -8,4 +8,8 @@ export class Questionnaire {
     frequency?: Frequency;
     thresholds?: ThresholdCollection[];
     questions? : Question[]
+
+    status?: string; //TODO: Change this to a enum
+    version?: number; //TODO: Change this to a enum
+    planDefinition?: string; //TODO: Change this to a enum
 }
