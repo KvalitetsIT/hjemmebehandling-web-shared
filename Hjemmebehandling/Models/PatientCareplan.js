@@ -4,9 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PatientCareplan = void 0;
+const FhirRessource_1 = require("./FhirRessource");
 const SimpleOrganization_1 = __importDefault(require("./SimpleOrganization"));
-class PatientCareplan {
+class PatientCareplan extends FhirRessource_1.FhirRessource {
     constructor() {
+        super(...arguments);
         this.planDefinitions = [];
         this.questionnaires = [];
     }

@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuestionnaireResponseStatus = exports.MeasurementType = exports.QuestionnaireResponse = void 0;
-class QuestionnaireResponse {
+const FhirRessource_1 = require("./FhirRessource");
+class QuestionnaireResponse extends FhirRessource_1.FhirRessource {
 }
 exports.QuestionnaireResponse = QuestionnaireResponse;
 var MeasurementType;

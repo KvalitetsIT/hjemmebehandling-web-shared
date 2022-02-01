@@ -3,8 +3,9 @@
     //- Tasklist
 
 import { StringFormatter } from "../Helpers/ModelHelpers/StringFormatters";
+import { FhirRessource } from "./FhirRessource";
 
-export class PatientSimple {
+export class PatientSimple extends FhirRessource {
     firstname?: string;
     lastname? : string;
     cpr?: string;

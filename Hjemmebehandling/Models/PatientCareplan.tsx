@@ -1,9 +1,10 @@
+import { FhirRessource } from "./FhirRessource";
 import { PatientDetail } from "./PatientDetail";
 import { PlanDefinition } from "./PlanDefinition";
 import { Questionnaire } from "./Questionnaire";
 import SimpleOrganization from "./SimpleOrganization";
 
-export class PatientCareplan {
+export class PatientCareplan extends FhirRessource {
     id? : string;
     planDefinitions : Array<PlanDefinition> = [];
     questionnaires : Questionnaire[] = []

@@ -1,9 +1,10 @@
 import { Answer } from "./Answer";
 import { CategoryEnum } from "./CategoryEnum";
+import { FhirRessource } from "./FhirRessource";
 import { PatientSimple } from "./PatientSimple";
 import { Question } from "./Question";
 
-export class QuestionnaireResponse {
+export class QuestionnaireResponse extends FhirRessource{
     id! : string
     questionnaireId! : string
     carePlanId!: string
