@@ -12,5 +12,4 @@ export class Questionnaire {
 
     status?: string; //TODO: Change this to a enum
     version?: number;
-    planDefinition?: PlanDefinition; 
 }
