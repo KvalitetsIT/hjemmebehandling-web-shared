@@ -8,10 +8,13 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import ChartData, { Dataset } from './ChartData';
 import IDateHelper from '../Helpers/interfaces/IDateHelper';
 
+
 export interface Props {
   chartData: ChartData
   showThresholds: boolean
   minimal: boolean;
+  minHeight: number;
+  maxHeight: number;
 }
 
 export class QuestionChart extends Component<Props, {}> {
@@ -19,7 +22,10 @@ export class QuestionChart extends Component<Props, {}> {
   static defaultProps = {
     minimal: false,
     showThresholds: true,
-    dateToString: (date: Date) => date.toLocaleDateString()
+    dateToString: (date: Date) => date.toLocaleDateString(),
+
+    minHeight: "400px",
+    maxHeight: "600px"
   }
 
   dateHelper!: IDateHelper
@@ -65,8 +71,7 @@ export class QuestionChart extends Component<Props, {}> {
     if (!this.props.minimal) {
       plugins = [ChartDataLabels as any]
     }
-
-    return (<Line height={100} plugins={plugins} options={options} data={data as any} />)
+    return (<Line style={{ minHeight: this.props.minHeight, maxHeight: this.props.maxHeight }} plugins={plugins} options={options} data={data as any} />)
   }
 
 

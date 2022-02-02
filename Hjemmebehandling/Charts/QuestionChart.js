@@ -67,7 +67,7 @@ class QuestionChart extends react_1.Component {
         if (!this.props.minimal) {
             plugins = [chartjs_plugin_datalabels_1.default];
         }
-        return (React.createElement(react_chartjs_2_1.Line, { height: 100, plugins: plugins, options: options, data: data }));
+        return (React.createElement(react_chartjs_2_1.Line, { style: { minHeight: this.props.minHeight, maxHeight: this.props.maxHeight }, plugins: plugins, options: options, data: data }));
     }
     render() {
         let answerData = this.props.chartData.answerData;
@@ -87,5 +87,7 @@ QuestionChart.displayName = QuestionChart.name;
 QuestionChart.defaultProps = {
     minimal: false,
     showThresholds: true,
-    dateToString: (date) => date.toLocaleDateString()
+    dateToString: (date) => date.toLocaleDateString(),
+    minHeight: "400px",
+    maxHeight: "600px"
 };
