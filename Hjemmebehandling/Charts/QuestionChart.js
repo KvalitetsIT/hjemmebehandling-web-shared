@@ -27,6 +27,9 @@ const React = __importStar(require("react"));
 const react_1 = require("react");
 const react_chartjs_2_1 = require("react-chartjs-2");
 const chartjs_plugin_datalabels_1 = __importDefault(require("chartjs-plugin-datalabels"));
+const chartjs_plugin_annotation_1 = __importDefault(require("chartjs-plugin-annotation"));
+const chart_js_1 = require("chart.js");
+chart_js_1.Chart.register(chart_js_1.CategoryScale, chart_js_1.LinearScale, chart_js_1.PointElement, chart_js_1.LineElement, chartjs_plugin_annotation_1.default, chart_js_1.Title, chart_js_1.Legend);
 class QuestionChart extends react_1.Component {
     renderGraph(data) {
         //Remove all the legends for the thresholdvalues (since we are only interested in the question being a legend)
@@ -54,6 +57,9 @@ class QuestionChart extends react_1.Component {
                 }
             },
             plugins: {
+                annotation: {
+                    annotations: this.props.chartData.getThresholdDatasets(this.props.showThresholds)
+                },
                 legend: {
                     labels: {
                         filter: function (item) {
@@ -74,7 +80,6 @@ class QuestionChart extends react_1.Component {
         let answerLabels = this.props.chartData.answerLabels;
         const dataSets = []; //Each entry represents one line in the chart
         dataSets.push(this.props.chartData.getDataDatasets(this.props.minimal));
-        this.props.chartData.getThresholdDatasets(this.props.showThresholds).forEach(x => dataSets.push(x));
         const data = {
             labels: answerLabels,
             datasets: dataSets,

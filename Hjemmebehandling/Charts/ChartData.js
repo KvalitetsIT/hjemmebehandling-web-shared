@@ -13,9 +13,7 @@ class ChartData {
         this.dateToString = dateToString;
         this.FromQuestionnaireResponsesToDataset(questionnaireResponses, question);
     }
-    getChipColorFromCategory(category, showThresholds) {
-        if (!showThresholds)
-            return "rgba(75,192,192,0)";
+    getChipColorFromCategory(category) {
         const greenLight = '#D0EFDC';
         const yellowLight = '#FFEFD0';
         const redLight = '#FAD8D7';
@@ -41,75 +39,21 @@ class ChartData {
     }
     getThresholdDatasets(showThresholds) {
         var _a, _b;
-        const datasets = [];
-        let isFirstIteration = true;
-        if (!((_a = this.thresholdCollection) === null || _a === void 0 ? void 0 : _a.thresholdNumbers))
+        if (showThresholds == false)
             return [];
-        (_b = this.thresholdCollection) === null || _b === void 0 ? void 0 : _b.thresholdNumbers.forEach(threshold => {
-            const dataFrom = [];
-            const dataTo = [];
-            for (let i = 0; i < this.numberOfResponses; i++) {
-                if (!(threshold.from === undefined)) {
-                    dataFrom.push(threshold.from);
-                }
-                if (!(threshold.to === undefined)) {
-                    dataTo.push(threshold.to);
-                }
-            }
-            //First iteration is expected to have the lowest from-value
-            //https://nextstepcitizen.atlassian.net/browse/RIM-493
-            //When a value is below the defined area of thresholds
-            //The value should have white background, and not the 
-            //same background as the one with lowest from-value
-            if (isFirstIteration) {
-                isFirstIteration = false;
-                //First create the from-line
-                const whiteDataset = {
-                    label: "white",
-                    data: dataFrom,
-                    pointRadius: 1,
-                    fill: true,
-                    datalabels: {
-                        color: "rgba(0,100,200,0)"
-                    },
-                    order: -888,
-                    backgroundColor: "white",
-                    borderColor: this.getChipColorFromCategory(threshold.category, showThresholds)
-                };
-                datasets.push(whiteDataset);
-            }
-            //For each threshold, we add two lines; from and to
-            //First create the from-line
-            const fromDataset = {
-                label: this.getDisplayNameFromCategory(threshold.category) + " (min)",
-                data: dataFrom,
-                pointRadius: 1,
-                fill: true,
-                datalabels: {
-                    color: "rgba(0,100,200,0)"
-                },
-                order: threshold.category,
-                backgroundColor: this.getChipColorFromCategory(threshold.category, showThresholds),
-                borderColor: this.getChipColorFromCategory(threshold.category, showThresholds)
-            };
-            datasets.push(fromDataset);
-            //Then create the to-line
-            const toDataset = {
-                label: this.getDisplayNameFromCategory(threshold.category) + " (max)",
-                data: dataTo,
-                pointRadius: 1,
-                fill: true,
-                datalabels: {
-                    color: 'rgba(0,100,200,0)'
-                },
-                order: threshold.category,
-                backgroundColor: this.getChipColorFromCategory(threshold.category, showThresholds),
-                borderColor: this.getChipColorFromCategory(threshold.category, showThresholds)
-            };
-            datasets.push(toDataset);
+        const thresholdOptions = [];
+        (_b = (_a = this.thresholdCollection) === null || _a === void 0 ? void 0 : _a.thresholdNumbers) === null || _b === void 0 ? void 0 : _b.forEach((threshold) => {
+            thresholdOptions.push({
+                drawTime: 'beforeDatasetsDraw',
+                type: 'box',
+                yMin: threshold.from,
+                yMax: threshold.to,
+                borderColor: 'rgba(255, 51, 51, 0.25)',
+                borderWidth: 0,
+                backgroundColor: this.getChipColorFromCategory(threshold.category),
+            });
         });
-        //Return the from and to line
-        return datasets;
+        return thresholdOptions;
     }
     getDataDatasets(showLabels) {
         return {

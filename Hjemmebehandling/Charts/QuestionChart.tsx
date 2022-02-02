@@ -7,7 +7,27 @@ import InsertChartIcon from '@mui/icons-material/InsertChart';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import ChartData, { Dataset } from './ChartData';
 import IDateHelper from '../Helpers/interfaces/IDateHelper';
+import annotationPlugin from "chartjs-plugin-annotation";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Legend,
+} from 'chart.js';
 
+ChartJS.register(
+
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  annotationPlugin,
+  Title,
+  Legend
+);
 
 export interface Props {
   chartData: ChartData
@@ -58,6 +78,9 @@ export class QuestionChart extends Component<Props, {}> {
         }
       },
       plugins: {
+        annotation: {
+          annotations: this.props.chartData.getThresholdDatasets(this.props.showThresholds)
+        },
         legend: {
           labels: {
             filter: function (item: { text: string }) {
@@ -86,7 +109,6 @@ export class QuestionChart extends Component<Props, {}> {
 
 
     dataSets.push(this.props.chartData.getDataDatasets(this.props.minimal))
-    this.props.chartData.getThresholdDatasets(this.props.showThresholds).forEach(x => dataSets.push(x))
 
     const data = {
       labels: answerLabels,
@@ -95,7 +117,4 @@ export class QuestionChart extends Component<Props, {}> {
 
     return (<>{this.renderGraph(data)}</>);
   }
-
-
-
 }
