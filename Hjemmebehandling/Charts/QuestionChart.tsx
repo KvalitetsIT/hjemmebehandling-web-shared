@@ -53,7 +53,7 @@ export class QuestionChart extends Component<Props, {}> {
   renderGraph(data: { labels: (string | undefined)[], datasets: {} }): JSX.Element {
     //Remove all the legends for the thresholdvalues (since we are only interested in the question being a legend)
     const options = {
-
+      maintainAspectRatio: false,
       scales: {
         y: {
           offset: true,

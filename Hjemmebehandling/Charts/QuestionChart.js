@@ -34,6 +34,7 @@ class QuestionChart extends react_1.Component {
     renderGraph(data) {
         //Remove all the legends for the thresholdvalues (since we are only interested in the question being a legend)
         const options = {
+            maintainAspectRatio: false,
             scales: {
                 y: {
                     offset: true,
