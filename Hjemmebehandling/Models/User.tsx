@@ -9,4 +9,9 @@ export class User{
 	entitlements?: string[];
 	autorisationsids?: string[];
 	orgName?: string;
+
+	isAdmin(){
+		const adminEntitlement = "DIAS_KoMo_Administrator";
+		return this.entitlements?.some(e => e == adminEntitlement);
+	}
 }
