@@ -8,6 +8,7 @@ export class Question implements IComparable<Question>{
     Id?: string
     question?: string
     helperText?: string
+    abbreviation?: string
     type?: QuestionTypeEnum
     options?: Array<string>;
     enableWhen?: EnableWhen<boolean>
