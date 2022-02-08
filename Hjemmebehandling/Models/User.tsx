@@ -11,7 +11,7 @@ export class User {
 	orgName?: string;
 
 	isAdmin() : boolean {
-		const adminEntitlement = "DIAS_KoMo_Administrator";
+		const adminEntitlement = "Administrator";
 		if (!this.entitlements)
 			return false;
 

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 class User {
     isAdmin() {
-        const adminEntitlement = "DIAS_KoMo_Administrator";
+        const adminEntitlement = "Administrator";
         if (!this.entitlements)
             return false;
         return this.entitlements.some(e => e == adminEntitlement);
