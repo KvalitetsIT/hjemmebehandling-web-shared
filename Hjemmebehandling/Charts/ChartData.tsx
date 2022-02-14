@@ -123,9 +123,9 @@ export default class ChartData {
             const response = questionnaireResponses[responseIndex];
             if (response && response.questions) {
                 const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id == question.Id);
-                const answer = response.questions.get(questionnaireQuestion!) as NumberAnswer
+                const answer = response.questions.get(questionnaireQuestion!) as NumberAnswer | undefined
 
-                if (answer.answer != undefined) {
+                if (answer?.answer != undefined) {
                     this.answerData.push(answer.answer)
                     this.answerLabels.push(this.dateToString(response.answeredTime!))
                 }

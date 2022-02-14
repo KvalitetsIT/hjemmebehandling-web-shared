@@ -79,7 +79,7 @@ class ChartData {
             if (response && response.questions) {
                 const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id == question.Id);
                 const answer = response.questions.get(questionnaireQuestion);
-                if (answer.answer != undefined) {
+                if ((answer === null || answer === void 0 ? void 0 : answer.answer) != undefined) {
                     this.answerData.push(answer.answer);
                     this.answerLabels.push(this.dateToString(response.answeredTime));
                 }
