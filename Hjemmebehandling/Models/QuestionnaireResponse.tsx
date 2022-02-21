@@ -8,7 +8,6 @@ export class QuestionnaireResponse extends FhirRessource{
     id! : string
     questionnaireId! : string
     carePlanId!: string
-    //measurements! : Map<MeasurementType,Measurement>
     questions? : Map<Question,Answer>;
     answeredTime! : Date | undefined ;
     examinedTime? : Date | undefined ;
@@ -16,12 +15,6 @@ export class QuestionnaireResponse extends FhirRessource{
     category! : CategoryEnum;
     patient! : PatientSimple
 
-}
-
-export enum  MeasurementType {
-    CRP = "CRP",
-    TEMPERATURE = "TEMPERATUR",
-    WEIGHT = "VÆGT"
 }
 
 export enum  QuestionnaireResponseStatus {

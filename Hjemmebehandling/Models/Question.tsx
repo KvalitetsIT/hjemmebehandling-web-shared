@@ -1,5 +1,6 @@
 import { EnableWhen } from "./EnableWhen";
 import { IComparable } from "./Interfaces/IComparable";
+import { MeasurementType } from "./MeasurementType";
 
 export class BaseQuestion implements IComparable<Question>{
     isEqual(other: Question): boolean {
@@ -16,6 +17,7 @@ export class Question extends BaseQuestion {
     helperText?: string
     abbreviation?: string
     enableWhen?: EnableWhen<boolean>
+    measurementType? : MeasurementType
 }
 
 export class CallToActionQuestion extends BaseQuestion {

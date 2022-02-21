@@ -46,7 +46,7 @@ class ToastError extends react_1.Component {
             react_1.default.createElement(material_1.Stack, null,
                 react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, title),
                 react_1.default.createElement(material_1.Typography, { variant: "caption" }, url)),
-            message));
+            react_1.default.createElement(material_1.Typography, { whiteSpace: "pre-wrap" }, message)));
     }
 }
 exports.ToastError = ToastError;

@@ -44,7 +44,9 @@ export class ToastError extends Component<Props, {}>{
                     <Typography variant="subtitle1">{title}</Typography>
                     <Typography variant="caption">{url}</Typography>
                 </Stack>
-                {message}
+                <Typography whiteSpace="pre-wrap">
+                    {message}
+                </Typography>
             </Toast>
         )
     }
