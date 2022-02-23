@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Button, ButtonGroup, Table, TableCell, TableRow, Tooltip } from '@mui/material';
+import { Button, ButtonGroup, Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from '@mui/material';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import ChartData, { Dataset } from './ChartData';
@@ -26,22 +26,24 @@ export class QuestionTable extends Component<Props, {}> {
         return (
             <>
                 <Table>
-                    <TableRow>
-                        <TableCell>
-
-                        </TableCell>
-                        {answerLabels.map(label => {
-                            return (<TableCell>{label}</TableCell>)
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Dato</TableCell>
+                            <TableCell>Værdi</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {answerLabels.map((date, index) => {
+                            const dateToRender = date;
+                            const dataPointToRender = datasets[0].data[index];
+                            return (
+                                <TableRow>
+                                    <TableCell>{dateToRender}</TableCell>
+                                    <TableCell>{dataPointToRender}</TableCell>
+                                </TableRow>
+                            )
                         })}
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-
-                        </TableCell>
-                        {datasets[0].data.map(label => {
-                            return (<TableCell>{label}</TableCell>)
-                        })}
-                    </TableRow>
+                    </TableBody>
                 </Table>
             </>
         )

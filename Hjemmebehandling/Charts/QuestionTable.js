@@ -27,16 +27,17 @@ class QuestionTable extends react_1.Component {
     renderTable(answerLabels, datasets) {
         return (React.createElement(React.Fragment, null,
             React.createElement(material_1.Table, null,
-                React.createElement(material_1.TableRow, null,
-                    React.createElement(material_1.TableCell, null),
-                    answerLabels.map(label => {
-                        return (React.createElement(material_1.TableCell, null, label));
-                    })),
-                React.createElement(material_1.TableRow, null,
-                    React.createElement(material_1.TableCell, null),
-                    datasets[0].data.map(label => {
-                        return (React.createElement(material_1.TableCell, null, label));
-                    })))));
+                React.createElement(material_1.TableHead, null,
+                    React.createElement(material_1.TableRow, null,
+                        React.createElement(material_1.TableCell, null, "Dato"),
+                        React.createElement(material_1.TableCell, null, "V\u00E6rdi"))),
+                React.createElement(material_1.TableBody, null, answerLabels.map((date, index) => {
+                    const dateToRender = date;
+                    const dataPointToRender = datasets[0].data[index];
+                    return (React.createElement(material_1.TableRow, null,
+                        React.createElement(material_1.TableCell, null, dateToRender),
+                        React.createElement(material_1.TableCell, null, dataPointToRender)));
+                })))));
     }
     render() {
         let answerData = this.props.chartData.answerData;
