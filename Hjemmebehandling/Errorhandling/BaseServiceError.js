@@ -30,6 +30,14 @@ class DisplaySettings {
          * This will display a button that runs window.location.href = "/oauth2/sign_out";
          */
         this.showLogoutButton = false;
+        /**
+         * This will display a button that will close the dialog
+         */
+        this.showCloseButton = false;
+        /**
+         * A function run when close-button is pressed
+         */
+        this.whenClosed = () => { };
     }
 }
 exports.DisplaySettings = DisplaySettings;

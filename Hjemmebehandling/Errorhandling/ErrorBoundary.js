@@ -7,15 +7,19 @@ exports.ErrorBoundary = void 0;
 const material_1 = require("@mui/material");
 const react_1 = __importDefault(require("react"));
 const BaseServiceError_1 = require("./BaseServiceError");
+const DialogError_1 = require("./DialogError");
 const ToastError_1 = require("./ToastError");
 class ErrorBoundary extends react_1.default.Component {
     constructor(props) {
         super(props);
-        this.state = { error: undefined };
+        this.state = {
+            error: undefined,
+            open: true
+        };
     }
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error, open) {
         // Update state so the next render will show the fallback UI.
-        return { error: error };
+        return { error: error, open: true };
     }
     componentDidCatch(error, errorInfo) {
         // You can also log the error to an error reporting service
@@ -26,7 +30,7 @@ class ErrorBoundary extends react_1.default.Component {
         if (this.state.error) {
             // You can render any custom fallback UI
             if (this.shouldBeLargeError()) {
-                return this.renderLargeError();
+                return (react_1.default.createElement(DialogError_1.DialogError, { error: this.state.error }));
             }
             return (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement(material_1.Alert, { severity: "error", title: this.props.ekstraText },
@@ -42,26 +46,8 @@ class ErrorBoundary extends react_1.default.Component {
             return this.state.error.displaySettings().displayInLargeDialog;
         return false;
     }
-    logout() {
-        window.location.href = "/oauth2/sign_out";
-    }
     reloadPage() {
         window.location.replace("/");
-    }
-    renderLargeError() {
-        const error = this.state.error;
-        const shouldShowReloadButton = error.displaySettings().showRefreshButton;
-        const shouldShowLogout = error.displaySettings().showLogoutButton;
-        return (react_1.default.createElement(material_1.Dialog, { fullWidth: true, open: true },
-            react_1.default.createElement(material_1.DialogTitle, { id: "alert-dialog-title" },
-                react_1.default.createElement(material_1.Typography, { variant: "subtitle1" }, error.displayTitle()),
-                react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayUrl())),
-            react_1.default.createElement(material_1.DialogContent, null,
-                react_1.default.createElement(material_1.DialogContentText, null,
-                    react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayMessage()))),
-            react_1.default.createElement(material_1.DialogActions, null,
-                shouldShowReloadButton ? react_1.default.createElement(material_1.Button, { autoFocus: true, onClick: this.reloadPage }, "Opdat\u00E9r siden") : react_1.default.createElement(react_1.default.Fragment, null),
-                shouldShowLogout ? react_1.default.createElement(material_1.Button, { variant: "contained", onClick: this.logout }, "Log ud") : react_1.default.createElement(react_1.default.Fragment, null))));
     }
 }
 exports.ErrorBoundary = ErrorBoundary;

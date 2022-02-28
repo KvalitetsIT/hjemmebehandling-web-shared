@@ -30,4 +30,14 @@ export class DisplaySettings {
      * This will display a button that runs window.location.href = "/oauth2/sign_out";
      */
     showLogoutButton: boolean = false;
+
+    /**
+     * This will display a button that will close the dialog
+     */
+    showCloseButton: boolean = false;
+
+    /**
+     * A function run when close-button is pressed
+     */
+    whenClosed: () => void = () => { }
 }

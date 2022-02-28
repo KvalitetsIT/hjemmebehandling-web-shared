@@ -1,6 +1,7 @@
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import React, { ErrorInfo } from "react";
 import { BaseServiceError } from "./BaseServiceError";
+import { DialogError } from "./DialogError";
 import { InternalServerError } from "./ServiceErrors/InternalServerError";
 import { NotCorrectRightsError } from "./ServiceErrors/NotCorrectRightsError";
 import { UnknownServiceError } from "./ServiceErrors/UnknownServiceError";
@@ -14,6 +15,7 @@ export interface Props {
 }
 export interface State {
   error?: Error
+  open: boolean
 }
 
 export class ErrorBoundary extends React.Component<Props, State> {
@@ -25,12 +27,15 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { error: undefined };
+    this.state = {
+      error: undefined,
+      open: true
+    };
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error, open: boolean): State {
     // Update state so the next render will show the fallback UI.
-    return { error: error };
+    return { error: error, open: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -44,7 +49,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
     if (this.state.error) {
       // You can render any custom fallback UI
       if (this.shouldBeLargeError()) {
-        return this.renderLargeError();
+        return (
+          <DialogError error={this.state.error as BaseServiceError} />
+        )
       }
 
       return (<>
@@ -68,39 +75,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
       return this.state.error.displaySettings().displayInLargeDialog
     return false;
   }
-  logout(): void {
-    window.location.href = "/oauth2/sign_out";
-  }
+  
   reloadPage(): void {
     window.location.replace("/");
   }
 
-  renderLargeError() {
-    const error = this.state.error as BaseServiceError
-    const shouldShowReloadButton = error.displaySettings().showRefreshButton;
-    const shouldShowLogout = error.displaySettings().showLogoutButton;
-
-
-    return (
-      <Dialog fullWidth open={true}>
-        <DialogTitle id="alert-dialog-title">
-          <Typography variant="subtitle1">{error.displayTitle()}</Typography>
-          <Typography variant="caption">{error.displayUrl()}</Typography>
-
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Typography variant="caption">{error.displayMessage()}</Typography>
-          </DialogContentText>
-
-
-        </DialogContent>
-
-        <DialogActions>
-          {shouldShowReloadButton ? <Button autoFocus onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
-          {shouldShowLogout ? <Button variant="contained" onClick={this.logout}>Log ud</Button> : <></>}
-        </DialogActions>
-      </Dialog>
-    )
-  }
 }
