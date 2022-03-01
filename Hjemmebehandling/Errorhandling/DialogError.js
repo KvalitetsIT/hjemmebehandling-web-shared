@@ -41,6 +41,7 @@ class DialogError extends react_1.Component {
         return (react_1.default.createElement(material_1.Dialog, { fullWidth: true, open: this.state.open },
             react_1.default.createElement(material_1.DialogTitle, { id: "alert-dialog-title" },
                 react_1.default.createElement(material_1.Stack, { direction: "row", alignItems: "center", spacing: 1 },
+                    this.props.iconAtStart,
                     react_1.default.createElement(material_1.Stack, null,
                         react_1.default.createElement(material_1.Typography, { variant: "h6" }, error.displayTitle()),
                         react_1.default.createElement(material_1.Typography, { variant: "caption" }, error.displayUrl())))),

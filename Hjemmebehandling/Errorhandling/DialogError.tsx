@@ -34,8 +34,8 @@ export class DialogError extends Component<Props, State>{
             <Dialog fullWidth open={this.state.open}>
                 <DialogTitle id="alert-dialog-title">
                     <Stack direction="row" alignItems="center" spacing={1}>
-
-                        <Stack>
+                        {this.props.iconAtStart}
+                        <Stack >
                             <Typography variant="h6">{error.displayTitle()}</Typography>
                             <Typography variant="caption">{error.displayUrl()}</Typography>
                         </Stack>
