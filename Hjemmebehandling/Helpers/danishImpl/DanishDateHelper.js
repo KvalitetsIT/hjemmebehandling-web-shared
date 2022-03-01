@@ -41,11 +41,11 @@ class DanishDateHelper {
 }
 exports.default = DanishDateHelper;
 class DateProperties {
-    constructor() {
-        this.showDate = true;
-        this.showMonth = true;
-        this.showYear = true;
-        this.showTime = false;
+    constructor(showDate, showMonth, showYear, showTime) {
+        this.showDate = showDate !== null && showDate !== void 0 ? showDate : true;
+        this.showMonth = showMonth !== null && showMonth !== void 0 ? showMonth : true;
+        this.showYear = showYear !== null && showYear !== void 0 ? showYear : true;
+        this.showTime = showTime !== null && showTime !== void 0 ? showTime : false;
     }
 }
 exports.DateProperties = DateProperties;

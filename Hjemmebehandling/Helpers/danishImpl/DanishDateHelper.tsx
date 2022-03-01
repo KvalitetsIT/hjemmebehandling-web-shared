@@ -22,7 +22,7 @@ export default class DanishDateHelper implements IDateHelper {
             toReturn += "-"
             toReturn += date.getFullYear()
         }
-        if(properties.showTime){
+        if (properties.showTime) {
             toReturn += " "
             toReturn += date.getTime()
         }
@@ -45,8 +45,20 @@ export default class DanishDateHelper implements IDateHelper {
 }
 
 export class DateProperties {
-    showDate: boolean = true;
-    showMonth: boolean = true;
-    showYear: boolean = true;
-    showTime: boolean = false;
+    showDate: boolean;
+    showMonth: boolean;
+    showYear: boolean;
+    showTime: boolean;
+
+    constructor(
+        showDate?: boolean,
+        showMonth?: boolean,
+        showYear?: boolean,
+        showTime?: boolean
+    ) {
+        this.showDate = showDate ?? true;
+        this.showMonth = showMonth ?? true;
+        this.showYear = showYear ?? true;
+        this.showTime = showTime ?? false;
+    }
 }
