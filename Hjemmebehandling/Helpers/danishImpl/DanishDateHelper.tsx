@@ -5,13 +5,27 @@ import IDateHelper from "../interfaces/IDateHelper";
 
 export default class DanishDateHelper implements IDateHelper {
 
-    DateToString(date: Date): string {
+    DateToString(date: Date, properties?: DateProperties): string {
+        if (!properties)
+            properties = new DateProperties();
+
         let toReturn = "";
-        toReturn += date.getDate()
-        toReturn += "-"
-        toReturn += date.getMonth() + 1 // Zero-indexed month.. Beacause JS..
-        toReturn += "-"
-        toReturn += date.getFullYear()
+
+        if (properties.showDate) {
+            toReturn += date.getDate()
+        }
+        if (properties.showMonth) {
+            toReturn += "-"
+            toReturn += date.getMonth() + 1 // Zero-indexed month.. Beacause JS..
+        }
+        if (properties.showYear) {
+            toReturn += "-"
+            toReturn += date.getFullYear()
+        }
+        if(properties.showTime){
+            toReturn += " "
+            toReturn += date.getTime()
+        }
         return toReturn;
     }
 
@@ -24,11 +38,15 @@ export default class DanishDateHelper implements IDateHelper {
         DayEnum.Friday,
         DayEnum.Saturday
     ]
-    
+
     DayIndexToDay(dayIndex: number): DayEnum {
         return this.days[dayIndex];
     }
+}
 
-
-
+export class DateProperties {
+    showDate: boolean = true;
+    showMonth: boolean = true;
+    showYear: boolean = true;
+    showTime: boolean = false;
 }

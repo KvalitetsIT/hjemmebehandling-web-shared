@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DateProperties = void 0;
 const Frequency_1 = require("../../Models/Frequency");
 class DanishDateHelper {
     constructor() {
@@ -13,13 +14,25 @@ class DanishDateHelper {
             Frequency_1.DayEnum.Saturday
         ];
     }
-    DateToString(date) {
+    DateToString(date, properties) {
+        if (!properties)
+            properties = new DateProperties();
         let toReturn = "";
-        toReturn += date.getDate();
-        toReturn += "-";
-        toReturn += date.getMonth() + 1; // Zero-indexed month.. Beacause JS..
-        toReturn += "-";
-        toReturn += date.getFullYear();
+        if (properties.showDate) {
+            toReturn += date.getDate();
+        }
+        if (properties.showMonth) {
+            toReturn += "-";
+            toReturn += date.getMonth() + 1; // Zero-indexed month.. Beacause JS..
+        }
+        if (properties.showYear) {
+            toReturn += "-";
+            toReturn += date.getFullYear();
+        }
+        if (properties.showTime) {
+            toReturn += " ";
+            toReturn += date.getTime();
+        }
         return toReturn;
     }
     DayIndexToDay(dayIndex) {
@@ -27,3 +40,12 @@ class DanishDateHelper {
     }
 }
 exports.default = DanishDateHelper;
+class DateProperties {
+    constructor() {
+        this.showDate = true;
+        this.showMonth = true;
+        this.showYear = true;
+        this.showTime = false;
+    }
+}
+exports.DateProperties = DateProperties;
