@@ -8,11 +8,10 @@ export default class DanishDateHelper implements IDateHelper {
     DateToString(date: Date): string {
         let toReturn = "";
         toReturn += date.getDate()
-        toReturn += "/"
+        toReturn += "-"
         toReturn += date.getMonth() + 1 // Zero-indexed month.. Beacause JS..
         toReturn += "-"
         toReturn += date.getFullYear()
-        //console.log(date.toLocaleDateString() + " => " + toReturn)
         return toReturn;
     }
 

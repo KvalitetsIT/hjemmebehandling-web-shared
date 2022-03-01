@@ -16,11 +16,10 @@ class DanishDateHelper {
     DateToString(date) {
         let toReturn = "";
         toReturn += date.getDate();
-        toReturn += "/";
+        toReturn += "-";
         toReturn += date.getMonth() + 1; // Zero-indexed month.. Beacause JS..
         toReturn += "-";
         toReturn += date.getFullYear();
-        //console.log(date.toLocaleDateString() + " => " + toReturn)
         return toReturn;
     }
     DayIndexToDay(dayIndex) {
