@@ -2,6 +2,7 @@
 
 import { DayEnum } from "../../Models/Frequency";
 import IDateHelper from "../interfaces/IDateHelper";
+import DateProperties from "./DateProperties";
 
 export default class DanishDateHelper implements IDateHelper {
 
@@ -24,7 +25,9 @@ export default class DanishDateHelper implements IDateHelper {
         }
         if (properties.showTime) {
             toReturn += " "
-            toReturn += date.getTime()
+            toReturn += date.getHours()
+            toReturn += ":"
+            toReturn += date.getMinutes()
         }
         return toReturn;
     }
@@ -44,21 +47,4 @@ export default class DanishDateHelper implements IDateHelper {
     }
 }
 
-export class DateProperties {
-    showDate: boolean;
-    showMonth: boolean;
-    showYear: boolean;
-    showTime: boolean;
 
-    constructor(
-        showDate?: boolean,
-        showMonth?: boolean,
-        showYear?: boolean,
-        showTime?: boolean
-    ) {
-        this.showDate = showDate ?? true;
-        this.showMonth = showMonth ?? true;
-        this.showYear = showYear ?? true;
-        this.showTime = showTime ?? false;
-    }
-}

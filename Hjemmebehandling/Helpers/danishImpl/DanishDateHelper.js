@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateProperties = void 0;
 const Frequency_1 = require("../../Models/Frequency");
+const DateProperties_1 = __importDefault(require("./DateProperties"));
 class DanishDateHelper {
     constructor() {
         this.days = [
@@ -16,7 +19,7 @@ class DanishDateHelper {
     }
     DateToString(date, properties) {
         if (!properties)
-            properties = new DateProperties();
+            properties = new DateProperties_1.default();
         let toReturn = "";
         if (properties.showDate) {
             toReturn += date.getDate();
@@ -31,7 +34,9 @@ class DanishDateHelper {
         }
         if (properties.showTime) {
             toReturn += " ";
-            toReturn += date.getTime();
+            toReturn += date.getHours();
+            toReturn += ":";
+            toReturn += date.getMinutes();
         }
         return toReturn;
     }
@@ -40,12 +45,3 @@ class DanishDateHelper {
     }
 }
 exports.default = DanishDateHelper;
-class DateProperties {
-    constructor(showDate, showMonth, showYear, showTime) {
-        this.showDate = showDate !== null && showDate !== void 0 ? showDate : true;
-        this.showMonth = showMonth !== null && showMonth !== void 0 ? showMonth : true;
-        this.showYear = showYear !== null && showYear !== void 0 ? showYear : true;
-        this.showTime = showTime !== null && showTime !== void 0 ? showTime : false;
-    }
-}
-exports.DateProperties = DateProperties;
