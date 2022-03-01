@@ -1,9 +1,10 @@
-import { Dialog, DialogTitle, Typography, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
+import { Dialog, DialogTitle, Typography, DialogContent, DialogContentText, DialogActions, Button, Stack, Divider } from "@mui/material";
 import React, { Component, ReactNode } from "react";
 import { BaseServiceError } from "./BaseServiceError";
 
 interface Props {
     error: BaseServiceError
+    iconAtStart?: JSX.Element
 }
 
 interface State {
@@ -32,18 +33,26 @@ export class DialogError extends Component<Props, State>{
         return (
             <Dialog fullWidth open={this.state.open}>
                 <DialogTitle id="alert-dialog-title">
-                    <Typography variant="subtitle1">{error.displayTitle()}</Typography>
-                    <Typography variant="caption">{error.displayUrl()}</Typography>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+
+                        <Stack>
+                            <Typography variant="h6">{error.displayTitle()}</Typography>
+                            <Typography variant="caption">{error.displayUrl()}</Typography>
+                        </Stack>
+                    </Stack>
+
 
                 </DialogTitle>
+                <Divider />
                 <DialogContent>
                     <DialogContentText>
-                        <Typography variant="caption">{error.displayMessage()}</Typography>
+                        <Typography variant="body1">{error.displayMessage()}</Typography>
+                        {this.props.children}
                     </DialogContentText>
 
 
                 </DialogContent>
-
+                <Divider />
                 <DialogActions>
                     {showCloseButton ? <Button onClick={() => this.closeDialog()}>Luk besked</Button> : <></>}
                     {shouldShowReloadButton ? <Button autoFocus onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
