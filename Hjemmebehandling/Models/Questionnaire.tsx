@@ -11,6 +11,7 @@ export class Questionnaire extends FhirRessource {
     thresholds?: ThresholdCollection[];
     questions?: BaseQuestion[]
     status?: string; //TODO: Change this to a enum
+    lastUpdated?: Date
 
     getCallToActions(): CallToActionQuestion[] {
         return this.questions?.filter(q => q instanceof CallToActionQuestion && q.type == QuestionTypeEnum.CALLTOACTION) ?? []
