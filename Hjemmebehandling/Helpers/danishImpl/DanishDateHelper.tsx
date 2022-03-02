@@ -13,11 +13,11 @@ export default class DanishDateHelper implements IDateHelper {
         let toReturn = "";
 
         if (properties.showDate) {
-            toReturn += date.getDate()
+            toReturn += this.toTwoDigits(date.getDate())
         }
         if (properties.showMonth) {
             toReturn += "-"
-            toReturn += date.getMonth() + 1 // Zero-indexed month.. Beacause JS..
+            toReturn += this.toTwoDigits(date.getMonth() + 1) // Zero-indexed month.. Beacause JS..
         }
         if (properties.showYear) {
             toReturn += "-"
@@ -25,11 +25,21 @@ export default class DanishDateHelper implements IDateHelper {
         }
         if (properties.showTime) {
             toReturn += " "
-            toReturn += date.getHours()
+            toReturn += this.toTwoDigits(date.getHours())
             toReturn += ":"
-            toReturn += date.getMinutes()
+            toReturn += this.toTwoDigits(date.getMinutes())
         }
         return toReturn;
+    }
+
+    private toTwoDigits(makeToTwoDigits: any): string {
+        const string: string = makeToTwoDigits.toString();
+        let toReturn = string;
+
+        if (toReturn.length < 2)
+            toReturn = "0" + toReturn
+
+        return toReturn
     }
 
     days = [
