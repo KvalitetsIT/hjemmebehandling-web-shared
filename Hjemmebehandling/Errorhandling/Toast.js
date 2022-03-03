@@ -31,6 +31,8 @@ class Toast extends react_1.Component {
     constructor(props) {
         super(props);
         this.closeSnackbar = () => {
+            if (this.props.onClose)
+                this.props.onClose();
             this.setState({ snackbarOpen: false });
         };
         this.state = {
@@ -56,5 +58,6 @@ exports.Toast = Toast;
 Toast.displayName = Toast.name;
 Toast.defaultProps = {
     positionVertical: "bottom",
-    positionhorizontal: "right"
+    positionhorizontal: "right",
+    onClose: () => { }
 };

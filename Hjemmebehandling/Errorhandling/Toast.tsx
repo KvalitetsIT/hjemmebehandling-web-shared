@@ -6,6 +6,7 @@ import { Slide, SlideProps, Snackbar, Stack, Typography } from '@mui/material';
 export interface ToastData {
     snackbarColor: AlertColor
     snackbarTitle: string
+    onClose: () => void;
 
     icon?: JSX.Element
     positionVertical: "bottom" | "top"
@@ -20,7 +21,8 @@ export class Toast extends Component<ToastData, State> {
     static displayName = Toast.name;
     public static defaultProps = {
         positionVertical: "bottom",
-        positionhorizontal: "right"
+        positionhorizontal: "right",
+        onClose: () => { }
     };
 
     constructor(props: ToastData) {
@@ -33,6 +35,8 @@ export class Toast extends Component<ToastData, State> {
         return <Slide {...props} direction="up" />;
     }
     closeSnackbar = (): void => {
+        if (this.props.onClose)
+            this.props.onClose();
         this.setState({ snackbarOpen: false })
     };
 
