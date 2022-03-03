@@ -43,11 +43,18 @@ class Toast extends react_1.Component {
     render() {
         let props = this.props;
         return (React.createElement(React.Fragment, null,
-            React.createElement(material_1.Snackbar, { TransitionComponent: this.TransitionUp, open: this.state.snackbarOpen, autoHideDuration: 6000, onClose: this.closeSnackbar, anchorOrigin: { vertical: 'bottom', horizontal: 'right' } },
-                React.createElement(Alert_1.default, { severity: props.snackbarColor, sx: { width: '100%' } },
-                    React.createElement("h5", null, props.snackbarTitle),
-                    props.children))));
+            React.createElement(material_1.Snackbar, { TransitionComponent: this.TransitionUp, open: this.state.snackbarOpen, autoHideDuration: 6000, onClose: this.closeSnackbar, anchorOrigin: { vertical: this.props.positionVertical, horizontal: this.props.positionhorizontal } },
+                React.createElement(Alert_1.default, { icon: false, severity: props.snackbarColor, sx: { width: '100%' } },
+                    React.createElement(material_1.Stack, { direction: "row", alignItems: "center", spacing: 2 },
+                        this.props.icon,
+                        React.createElement(material_1.Stack, null,
+                            React.createElement(material_1.Typography, { color: "white" }, props.snackbarTitle),
+                            props.children))))));
     }
 }
 exports.Toast = Toast;
 Toast.displayName = Toast.name;
+Toast.defaultProps = {
+    positionVertical: "bottom",
+    positionhorizontal: "right"
+};

@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { Component } from 'react';
 import Alert, { AlertColor } from '@mui/material/Alert';
-import { Slide, SlideProps, Snackbar } from '@mui/material';
+import { Slide, SlideProps, Snackbar, Stack, Typography } from '@mui/material';
 
 export interface ToastData {
-    snackbarColor: AlertColor,
+    snackbarColor: AlertColor
     snackbarTitle: string
+
+    icon?: JSX.Element
+    positionVertical: "bottom" | "top"
+    positionhorizontal: "right" | "left" | "center"
 }
 
 export interface State {
@@ -14,6 +18,10 @@ export interface State {
 
 export class Toast extends Component<ToastData, State> {
     static displayName = Toast.name;
+    public static defaultProps = {
+        positionVertical: "bottom",
+        positionhorizontal: "right"
+    };
 
     constructor(props: ToastData) {
         super(props);
@@ -32,10 +40,21 @@ export class Toast extends Component<ToastData, State> {
         let props = this.props
         return (
             <>
-                <Snackbar TransitionComponent={this.TransitionUp} open={this.state.snackbarOpen} autoHideDuration={6000} onClose={this.closeSnackbar} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                    <Alert severity={props.snackbarColor} sx={{ width: '100%' }}>
-                        <h5>{props.snackbarTitle}</h5>
-                        {props.children}
+                <Snackbar
+                    TransitionComponent={this.TransitionUp}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={this.closeSnackbar}
+                    anchorOrigin={{ vertical: this.props.positionVertical, horizontal: this.props.positionhorizontal }}
+                >
+                    <Alert icon={false} severity={props.snackbarColor} sx={{ width: '100%' }}>
+                        <Stack direction="row" alignItems="center" spacing={2}>
+                            {this.props.icon}
+                            <Stack>
+                                <Typography color="white">{props.snackbarTitle}</Typography>
+                                {props.children}
+                            </Stack>
+                        </Stack>
                     </Alert>
                 </Snackbar>
             </>
