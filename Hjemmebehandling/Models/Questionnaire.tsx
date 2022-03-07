@@ -1,6 +1,8 @@
+import { StringToEnumMappers } from "../Helpers/ModelHelpers/StringToEnumMappers";
+import { BaseModelStatus } from "./BaseModelStatus";
 import { FhirRessource } from "./FhirRessource";
 import { Frequency } from "./Frequency";
-import { PlanDefinition } from "./PlanDefinition";
+import { PlanDefinition, PlanDefinitionStatus } from "./PlanDefinition";
 import { BaseQuestion, CallToActionQuestion, Question, QuestionTypeEnum } from "./Question";
 import { ThresholdCollection } from "./ThresholdCollection";
 
@@ -10,7 +12,7 @@ export class Questionnaire extends FhirRessource {
     frequency?: Frequency;
     thresholds?: ThresholdCollection[];
     questions?: BaseQuestion[]
-    status?: string; //TODO: Change this to a enum
+    status?: QuestionnaireStatus | BaseModelStatus;
     lastUpdated?: Date
 
     getCallToActions(): CallToActionQuestion[] {
@@ -28,4 +30,18 @@ export class Questionnaire extends FhirRessource {
 
         return toReturn ?? []
     }
+
+    static stringToQuestionnaireStatus(stringStatus?: string): QuestionnaireStatus | BaseModelStatus {
+
+        switch (stringStatus) {
+            // If Questionnaire should have different status' than BaseModelStatus, they are added here like
+            //case "InQuestion":
+            //  return QuestionnaireStatus.InQuestion
+        }
+        return StringToEnumMappers.stringToBaseModelStatus(stringStatus);
+    }
+}
+
+export enum QuestionnaireStatus {
+    //Only status' specific to questionnaire should be listed here - Otherwise in BaseModelStatus
 }

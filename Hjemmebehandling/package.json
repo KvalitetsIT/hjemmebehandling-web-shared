@@ -1,6 +1,6 @@
 {
   "name": "@kvalitetsit/hjemmebehandling",
-  "version": "1.4.56",
+  "version": "1.4.59",
   "description": "common reactcomponents that are used across hjemmebehandlings-project",
   "main": "index.js",
   "dependencies": {
