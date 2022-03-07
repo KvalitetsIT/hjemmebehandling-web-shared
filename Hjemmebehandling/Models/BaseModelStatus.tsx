@@ -1,5 +1,5 @@
 export enum BaseModelStatus {
-    DRAFT = "Kladde",
-    ACTIVE = "Aktivt",
-    UKENDT = "Ukendt"
+    DRAFT = "DRAFT", //The string value is the bff-name of the status
+    ACTIVE = "ACTIVE",
+    UKENDT = "UNKNOWN"
 }

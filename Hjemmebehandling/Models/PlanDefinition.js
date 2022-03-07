@@ -4,11 +4,11 @@ exports.PlanDefinitionStatus = exports.PlanDefinition = void 0;
 const StringToEnumMappers_1 = require("../Helpers/ModelHelpers/StringToEnumMappers");
 const FhirRessource_1 = require("./FhirRessource");
 class PlanDefinition extends FhirRessource_1.FhirRessource {
-    static stringToQuestionnaireStatus(stringStatus) {
+    static stringToPlanDefinitionStatus(stringStatus) {
         switch (stringStatus) {
             // If PlanDefinition should have different status' than BaseModelStatus, they are added here like
-            //case "InProgress"
-            //return PlanDefinitionStatus.InProgress
+            //case "InProgress":
+            //  return PlanDefinitionStatus.InProgress
         }
         return StringToEnumMappers_1.StringToEnumMappers.stringToBaseModelStatus(stringStatus);
     }

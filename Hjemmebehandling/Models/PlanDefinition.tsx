@@ -11,12 +11,12 @@ export class PlanDefinition extends FhirRessource {
     status?: PlanDefinitionStatus | BaseModelStatus
     created?: Date
 
-    static stringToQuestionnaireStatus(stringStatus?: string): PlanDefinitionStatus | BaseModelStatus {
+    static stringToPlanDefinitionStatus(stringStatus?: string): PlanDefinitionStatus | BaseModelStatus {
 
         switch (stringStatus) {
             // If PlanDefinition should have different status' than BaseModelStatus, they are added here like
-            //case "InProgress"
-            //return PlanDefinitionStatus.InProgress
+            //case "InProgress":
+            //  return PlanDefinitionStatus.InProgress
         }
         return StringToEnumMappers.stringToBaseModelStatus(stringStatus);
     }
