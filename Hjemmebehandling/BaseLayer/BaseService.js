@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StatusCodeMap = void 0;
 const BaseApiError_1 = require("../Errorhandling/BaseApiError");
 const BaseServiceError_1 = require("../Errorhandling/BaseServiceError");
+const BadGatewayError_1 = require("../Errorhandling/ServiceErrors/BadGatewayError");
 const BadRequestError_1 = require("../Errorhandling/ServiceErrors/BadRequestError");
 const GenericApiError_1 = require("../Errorhandling/ServiceErrors/GenericApiError");
 const InternalServerError_1 = require("../Errorhandling/ServiceErrors/InternalServerError");
@@ -25,6 +26,7 @@ class BaseService {
         this.AddStatusCodeToErrorMap(new StatusCodeMap(403, this.ReturnError403));
         this.AddStatusCodeToErrorMap(new StatusCodeMap(404, this.ReturnError404));
         this.AddStatusCodeToErrorMap(new StatusCodeMap(500, this.ReturnError500));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(502, this.ReturnError502));
     }
     ValidatePagination(page, pageSize) {
         let errors = [];
@@ -75,6 +77,10 @@ class BaseService {
     }
     ReturnError500(apiError) {
         return new InternalServerError_1.InternalServerError();
+    }
+    ReturnError502(apiError) {
+        var _a;
+        return new BadGatewayError_1.BadGatewayError((_a = apiError.errorMessage) !== null && _a !== void 0 ? _a : "");
     }
 }
 exports.default = BaseService;

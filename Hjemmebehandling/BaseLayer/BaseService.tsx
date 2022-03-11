@@ -1,5 +1,6 @@
 import { BaseApiError } from "../Errorhandling/BaseApiError";
 import { BaseServiceError } from "../Errorhandling/BaseServiceError";
+import { BadGatewayError } from "../Errorhandling/ServiceErrors/BadGatewayError";
 import { BadRequestError } from "../Errorhandling/ServiceErrors/BadRequestError";
 import { GenericApiError } from "../Errorhandling/ServiceErrors/GenericApiError";
 import { InternalServerError } from "../Errorhandling/ServiceErrors/InternalServerError";
@@ -28,6 +29,7 @@ export default class BaseService {
         this.AddStatusCodeToErrorMap(new StatusCodeMap(403, this.ReturnError403));
         this.AddStatusCodeToErrorMap(new StatusCodeMap(404, this.ReturnError404));
         this.AddStatusCodeToErrorMap(new StatusCodeMap(500, this.ReturnError500));
+        this.AddStatusCodeToErrorMap(new StatusCodeMap(502, this.ReturnError502));
     }
 
     ValidatePagination(page: number, pageSize: number): void {
@@ -87,5 +89,8 @@ export default class BaseService {
     }
     ReturnError500(apiError: BaseApiError): BaseServiceError {
         return new InternalServerError();
+    }
+    ReturnError502(apiError: BaseApiError): BaseServiceError {
+        return new BadGatewayError(apiError.errorMessage ?? "");
     }
 }
