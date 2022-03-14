@@ -79,8 +79,7 @@ class BaseService {
         return new InternalServerError_1.InternalServerError();
     }
     ReturnError502(apiError) {
-        var _a;
-        return new BadGatewayError_1.BadGatewayError((_a = apiError.errorMessage) !== null && _a !== void 0 ? _a : "");
+        return new BadGatewayError_1.BadGatewayError(apiError.displayMessage(), apiError.displayUrl());
     }
 }
 exports.default = BaseService;

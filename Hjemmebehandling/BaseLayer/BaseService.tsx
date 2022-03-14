@@ -91,6 +91,6 @@ export default class BaseService {
         return new InternalServerError();
     }
     ReturnError502(apiError: BaseApiError): BaseServiceError {
-        return new BadGatewayError(apiError.errorMessage ?? "");
+        return new BadGatewayError(apiError.displayMessage(),apiError.displayUrl());
     }
 }
