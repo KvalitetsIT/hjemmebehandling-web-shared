@@ -7,7 +7,7 @@ class ChartData {
         var _a;
         this.answerData = [];
         this.answerLabels = [];
-        this.label = (_a = question.question) !== null && _a !== void 0 ? _a : "";
+        this.label = (_a = question.abbreviation) !== null && _a !== void 0 ? _a : "";
         this.thresholdCollection = thresholdCollection;
         this.numberOfResponses = questionnaireResponses.length;
         this.dateToString = dateToString;

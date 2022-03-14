@@ -37,7 +37,7 @@ export default class ChartData {
     constructor(questionnaireResponses: QuestionnaireResponse[], question: Question, thresholdCollection: ThresholdCollection | undefined, dateToString: (date: Date) => string) {
         this.answerData = [];
         this.answerLabels = []
-        this.label = question.question ?? "";
+        this.label = question.abbreviation ?? "";
         this.thresholdCollection = thresholdCollection;
         this.numberOfResponses = questionnaireResponses.length
         this.dateToString = dateToString
