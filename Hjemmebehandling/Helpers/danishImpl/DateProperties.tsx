@@ -13,6 +13,6 @@ export default class DateProperties {
         this.showDate = showDate ?? true;
         this.showMonth = showMonth ?? true;
         this.showYear = showYear ?? true;
-        this.showTime = showTime ?? false;
+        this.showTime = showTime ?? true;
     }
 }

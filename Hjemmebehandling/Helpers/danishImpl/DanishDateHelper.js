@@ -33,7 +33,7 @@ class DanishDateHelper {
             toReturn += date.getFullYear();
         }
         if (properties.showTime) {
-            toReturn += " ";
+            toReturn += " kl. ";
             toReturn += this.toTwoDigits(date.getHours());
             toReturn += ":";
             toReturn += this.toTwoDigits(date.getMinutes());
