@@ -31,9 +31,9 @@ const CategoryEnum_1 = require("../Models/CategoryEnum");
 class ThresholdSlider extends react_1.Component {
     constructor(props) {
         super(props);
-        this.green = '#61BD84';
-        this.yellow = '#FFD78C';
-        this.red = '#EE6969';
+        this.greenLight = '#D0EFDC';
+        this.yellowLight = '#FFEFD0';
+        this.redLight = '#FAD8D7';
         this.state = {
             questionnaireResponses: [],
             loading: true
@@ -141,11 +141,11 @@ class ThresholdSlider extends react_1.Component {
     }
     getChipColorFromCategory(category) {
         if (category === CategoryEnum_1.CategoryEnum.RED)
-            return this.red;
+            return this.redLight;
         if (category === CategoryEnum_1.CategoryEnum.YELLOW)
-            return this.yellow;
+            return this.yellowLight;
         if (category === CategoryEnum_1.CategoryEnum.GREEN)
-            return this.green;
+            return this.greenLight;
         return "";
     }
 }

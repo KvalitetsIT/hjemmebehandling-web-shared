@@ -23,7 +23,7 @@ export class ThresholdSlider extends Component<Props, {}> {
         }
     }
 
- 
+
 
     render(): JSX.Element {
         const thresholdNumbers = this.props.threshold.sort(this.compareThresholdNumbers);
@@ -155,16 +155,16 @@ export class ThresholdSlider extends Component<Props, {}> {
         return totalWidth
     }
 
-    green = '#61BD84'
-    yellow = '#FFD78C'
-    red = '#EE6969'
+    greenLight = '#D0EFDC'
+    yellowLight = '#FFEFD0'
+    redLight = '#FAD8D7'
     getChipColorFromCategory(category: CategoryEnum): string {
         if (category === CategoryEnum.RED)
-            return this.red
+            return this.redLight
         if (category === CategoryEnum.YELLOW)
-            return this.yellow
+            return this.yellowLight
         if (category === CategoryEnum.GREEN)
-            return this.green
+            return this.greenLight
 
         return ""
 
