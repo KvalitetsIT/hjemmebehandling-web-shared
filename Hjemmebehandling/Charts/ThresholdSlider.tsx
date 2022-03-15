@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { Component } from 'react';
-import { Chip, Stack, Typography } from '@mui/material';
+import { createTheme, Slider, ThemeProvider, Typography } from '@mui/material';
 import { ThresholdNumber } from '../Models/ThresholdNumber';
 import { Question } from '../Models/Question';
 import { CategoryEnum } from '../Models/CategoryEnum';
@@ -23,6 +23,66 @@ export class ThresholdSlider extends Component<Props, {}> {
         }
     }
 
+ 
+
+    render(): JSX.Element {
+        const thresholdNumbers = this.props.threshold.sort(this.compareThresholdNumbers);
+        console.log(thresholdNumbers)
+        return (
+            <Box paddingRight={5} paddingLeft={5}>
+                <ThemeProvider theme={createTheme({
+                    components: {
+                        MuiSlider: {
+                            styleOverrides: {
+                                track: {
+                                    background: this.generateColor(thresholdNumbers),
+                                    height: 20,
+                                    border: 0,
+                                },
+                                thumbColorPrimary: {
+                                    opacity: 0
+                                },
+                            }
+                        },
+                        MuiFilledInput: {
+                            styleOverrides: {
+                                root: {
+                                    backgroundColor: "transparent"
+                                }
+                            }
+                        }
+                    }
+                })}>
+                    <Slider
+                        disableSwap
+                        sx={{
+                            minHeight: 50,
+                        }}
+                        key={"slider_" + this.props.question.Id}
+                        value={[
+                            ...thresholdNumbers.map(x => x.from!),
+                            ...thresholdNumbers.map(x => x.to!)
+                        ]}
+                        marks={[
+                            ...thresholdNumbers.map(t => this.renderMarks(() => t.from!)),
+                            ...thresholdNumbers.map(t => this.renderMarks(() => t.to!))
+                        ]}
+                        max={this.max(thresholdNumbers)}
+                        aria-labelledby="discrete-slider"
+                        valueLabelDisplay="off"
+                    />
+                </ThemeProvider>
+            </Box>
+        );
+    }
+
+    renderMarks(toValue: () => number): { label: JSX.Element, value: number } {
+        const label = (
+            <Typography variant="h6" marginTop={5}>{toValue()}</Typography>
+        )
+        return { label: label, value: toValue() }
+    }
+
     getColorFromCategory(category: CategoryEnum): "success" | "warning" | "error" | "info" {
         if (category === CategoryEnum.GREEN)
             return "success"
@@ -39,10 +99,10 @@ export class ThresholdSlider extends Component<Props, {}> {
         // a == b => 0
         // a > b => Positive value
 
-        let aFromIsUndefined = a.from === undefined;
-        let aToIsUndefined = a.to === undefined;
-        let bFromIsUndefined = b.from === undefined;
-        let bToIsUndefined = b.to === undefined;
+        const aFromIsUndefined = a.from === undefined;
+        const aToIsUndefined = a.to === undefined;
+        const bFromIsUndefined = b.from === undefined;
+        const bToIsUndefined = b.to === undefined;
 
         if (aFromIsUndefined)
             return Number.MIN_SAFE_INTEGER
@@ -56,38 +116,57 @@ export class ThresholdSlider extends Component<Props, {}> {
         return a.from! - b.from!
     }
 
-    render(): JSX.Element {
-        let oldTo: number | undefined = undefined;
+    generateColor(thresholdNumbers: ThresholdNumber[]): string {
+        let string = "";
+        const hundredPercent = this.max(thresholdNumbers);
 
-        let totalWidth : number = 0;
-        this.props.threshold.forEach( threshold => {
+        let latestPercentageTo = 0;
+        thresholdNumbers.forEach((t) => {
+
+            const percentageFrom = latestPercentageTo
+            let percentageTo = 1;
+            if (t.to != undefined && t.from != undefined)
+                percentageTo = (t.to - t.from + percentageFrom)
+
+            latestPercentageTo = percentageTo
+
+            if (string != "")
+                string += ", "
+
+            string += this.getChipColorFromCategory(t.category)
+            string += " "
+            string += (percentageFrom / hundredPercent * 100) + "%"
+            string += ", "
+            string += this.getChipColorFromCategory(t.category)
+            string += " "
+            string += (percentageTo / hundredPercent * 100) + "%"
+        });
+
+        return "linear-gradient(90deg, " + string + ")";
+    }
+
+    max(thresholdNumbers: ThresholdNumber[]): number {
+        let totalWidth: number = 0;
+        thresholdNumbers.forEach(threshold => {
             const to = threshold.to ?? 100;
             const from = threshold.from ?? -100;
             totalWidth += to - from
         })
+        return totalWidth
+    }
 
-        return (
-            <Stack direction="row">
-                {this.props.threshold.sort(this.compareThresholdNumbers).map(x => {
-                    const shouldShowNewFrom = oldTo !== x.from;
-                    oldTo = x.to;
+    green = '#61BD84'
+    yellow = '#FFD78C'
+    red = '#EE6969'
+    getChipColorFromCategory(category: CategoryEnum): string {
+        if (category === CategoryEnum.RED)
+            return this.red
+        if (category === CategoryEnum.YELLOW)
+            return this.yellow
+        if (category === CategoryEnum.GREEN)
+            return this.green
 
-                    const to = x.to ?? 100;
-                    const from = x.from ?? 100;
+        return ""
 
-                    let size = (to - from)/totalWidth*100;
-                 
-                    return (
-                        <>
-                            {shouldShowNewFrom ? <Typography variant="caption" padding={1}>{x.from}</Typography> : <></>}
-
-                            <Chip className='darkColor' width={size+"%"} component={Box} sx={{ height: 10 }} color={this.getColorFromCategory(x.category)} />
-                            <Typography variant="caption" padding={1}>{x.to}</Typography>
-                        </>
-                    )
-                })}
-
-            </Stack>
-        );
     }
 }

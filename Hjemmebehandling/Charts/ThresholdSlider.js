@@ -31,10 +31,54 @@ const CategoryEnum_1 = require("../Models/CategoryEnum");
 class ThresholdSlider extends react_1.Component {
     constructor(props) {
         super(props);
+        this.green = '#61BD84';
+        this.yellow = '#FFD78C';
+        this.red = '#EE6969';
         this.state = {
             questionnaireResponses: [],
             loading: true
         };
+    }
+    render() {
+        const thresholdNumbers = this.props.threshold.sort(this.compareThresholdNumbers);
+        console.log(thresholdNumbers);
+        return (React.createElement(Box_1.default, { paddingRight: 5, paddingLeft: 5 },
+            React.createElement(material_1.ThemeProvider, { theme: (0, material_1.createTheme)({
+                    components: {
+                        MuiSlider: {
+                            styleOverrides: {
+                                track: {
+                                    background: this.generateColor(thresholdNumbers),
+                                    height: 20,
+                                    border: 0,
+                                },
+                                thumbColorPrimary: {
+                                    opacity: 0
+                                },
+                            }
+                        },
+                        MuiFilledInput: {
+                            styleOverrides: {
+                                root: {
+                                    backgroundColor: "transparent"
+                                }
+                            }
+                        }
+                    }
+                }) },
+                React.createElement(material_1.Slider, { disableSwap: true, sx: {
+                        minHeight: 50,
+                    }, key: "slider_" + this.props.question.Id, value: [
+                        ...thresholdNumbers.map(x => x.from),
+                        ...thresholdNumbers.map(x => x.to)
+                    ], marks: [
+                        ...thresholdNumbers.map(t => this.renderMarks(() => t.from)),
+                        ...thresholdNumbers.map(t => this.renderMarks(() => t.to))
+                    ], max: this.max(thresholdNumbers), "aria-labelledby": "discrete-slider", valueLabelDisplay: "off" }))));
+    }
+    renderMarks(toValue) {
+        const label = (React.createElement(material_1.Typography, { variant: "h6", marginTop: 5 }, toValue()));
+        return { label: label, value: toValue() };
     }
     getColorFromCategory(category) {
         if (category === CategoryEnum_1.CategoryEnum.GREEN)
@@ -49,10 +93,10 @@ class ThresholdSlider extends react_1.Component {
         // a < b => Negative value
         // a == b => 0
         // a > b => Positive value
-        let aFromIsUndefined = a.from === undefined;
-        let aToIsUndefined = a.to === undefined;
-        let bFromIsUndefined = b.from === undefined;
-        let bToIsUndefined = b.to === undefined;
+        const aFromIsUndefined = a.from === undefined;
+        const aToIsUndefined = a.to === undefined;
+        const bFromIsUndefined = b.from === undefined;
+        const bToIsUndefined = b.to === undefined;
         if (aFromIsUndefined)
             return Number.MIN_SAFE_INTEGER;
         if (aToIsUndefined)
@@ -63,27 +107,46 @@ class ThresholdSlider extends react_1.Component {
             return Number.MIN_SAFE_INTEGER;
         return a.from - b.from;
     }
-    render() {
-        let oldTo = undefined;
+    generateColor(thresholdNumbers) {
+        let string = "";
+        const hundredPercent = this.max(thresholdNumbers);
+        let latestPercentageTo = 0;
+        thresholdNumbers.forEach((t) => {
+            const percentageFrom = latestPercentageTo;
+            let percentageTo = 1;
+            if (t.to != undefined && t.from != undefined)
+                percentageTo = (t.to - t.from + percentageFrom);
+            latestPercentageTo = percentageTo;
+            if (string != "")
+                string += ", ";
+            string += this.getChipColorFromCategory(t.category);
+            string += " ";
+            string += (percentageFrom / hundredPercent * 100) + "%";
+            string += ", ";
+            string += this.getChipColorFromCategory(t.category);
+            string += " ";
+            string += (percentageTo / hundredPercent * 100) + "%";
+        });
+        return "linear-gradient(90deg, " + string + ")";
+    }
+    max(thresholdNumbers) {
         let totalWidth = 0;
-        this.props.threshold.forEach(threshold => {
+        thresholdNumbers.forEach(threshold => {
             var _a, _b;
             const to = (_a = threshold.to) !== null && _a !== void 0 ? _a : 100;
             const from = (_b = threshold.from) !== null && _b !== void 0 ? _b : -100;
             totalWidth += to - from;
         });
-        return (React.createElement(material_1.Stack, { direction: "row" }, this.props.threshold.sort(this.compareThresholdNumbers).map(x => {
-            var _a, _b;
-            const shouldShowNewFrom = oldTo !== x.from;
-            oldTo = x.to;
-            const to = (_a = x.to) !== null && _a !== void 0 ? _a : 100;
-            const from = (_b = x.from) !== null && _b !== void 0 ? _b : 100;
-            let size = (to - from) / totalWidth * 100;
-            return (React.createElement(React.Fragment, null,
-                shouldShowNewFrom ? React.createElement(material_1.Typography, { variant: "caption", padding: 1 }, x.from) : React.createElement(React.Fragment, null),
-                React.createElement(material_1.Chip, { className: 'darkColor', width: size + "%", component: Box_1.default, sx: { height: 10 }, color: this.getColorFromCategory(x.category) }),
-                React.createElement(material_1.Typography, { variant: "caption", padding: 1 }, x.to)));
-        })));
+        return totalWidth;
+    }
+    getChipColorFromCategory(category) {
+        if (category === CategoryEnum_1.CategoryEnum.RED)
+            return this.red;
+        if (category === CategoryEnum_1.CategoryEnum.YELLOW)
+            return this.yellow;
+        if (category === CategoryEnum_1.CategoryEnum.GREEN)
+            return this.green;
+        return "";
     }
 }
 exports.ThresholdSlider = ThresholdSlider;
