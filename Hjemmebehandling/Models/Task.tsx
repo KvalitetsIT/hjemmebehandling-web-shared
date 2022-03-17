@@ -12,10 +12,17 @@ export class Task {
     questionnaireId!: string
     answeredTime?: Date
     planDefinitionName?: string
+    satisfiedUntil?: Date
     responseLinkEnabled!: boolean
 
     cprToString(): string {
         return StringFormatter.FormatCpr(this.cpr);
+    }
+
+    isUnsatisfied(): boolean {
+        if (this.satisfiedUntil)
+            return this.satisfiedUntil?.compareTo(new Date()) < 0;
+        return false;
     }
 
     IsEqual(otherTask: Task) {

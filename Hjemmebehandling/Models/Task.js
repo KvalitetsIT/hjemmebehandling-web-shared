@@ -6,6 +6,12 @@ class Task {
     cprToString() {
         return StringFormatters_1.StringFormatter.FormatCpr(this.cpr);
     }
+    isUnsatisfied() {
+        var _a;
+        if (this.satisfiedUntil)
+            return ((_a = this.satisfiedUntil) === null || _a === void 0 ? void 0 : _a.compareTo(new Date())) < 0;
+        return false;
+    }
     IsEqual(otherTask) {
         let isEqual = true;
         isEqual && (isEqual = this.cpr == otherTask.cpr);
