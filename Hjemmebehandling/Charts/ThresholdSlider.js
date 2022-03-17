@@ -74,7 +74,7 @@ class ThresholdSlider extends react_1.Component {
                     ], marks: [
                         ...thresholdNumbers.map(t => this.renderMarks(() => t.from)),
                         ...thresholdNumbers.map(t => this.renderMarks(() => t.to))
-                    ], max: this.max(thresholdNumbers), "aria-labelledby": "discrete-slider", valueLabelDisplay: "off" }))));
+                    ], max: this.max(thresholdNumbers), min: this.min(thresholdNumbers), "aria-labelledby": "discrete-slider", valueLabelDisplay: "off" }))));
     }
     renderMarks(toValue) {
         const label = (React.createElement(material_1.Typography, { variant: "h6", marginTop: 5 }, toValue()));
@@ -109,7 +109,7 @@ class ThresholdSlider extends react_1.Component {
     }
     generateColor(thresholdNumbers) {
         let string = "";
-        const hundredPercent = this.max(thresholdNumbers);
+        const hundredPercent = this.calculatetotalAmount(thresholdNumbers);
         let latestPercentageTo = 0;
         thresholdNumbers.forEach((t) => {
             const percentageFrom = latestPercentageTo;
@@ -129,7 +129,7 @@ class ThresholdSlider extends react_1.Component {
         });
         return "linear-gradient(90deg, " + string + ")";
     }
-    max(thresholdNumbers) {
+    calculatetotalAmount(thresholdNumbers) {
         let totalWidth = 0;
         thresholdNumbers.forEach(threshold => {
             var _a, _b;
@@ -138,6 +138,20 @@ class ThresholdSlider extends react_1.Component {
             totalWidth += to - from;
         });
         return totalWidth;
+    }
+    min(thresholdNumbers) {
+        const fromValues = thresholdNumbers.map(x => x.from);
+        const min = Math.min(...fromValues);
+        console.log("min");
+        console.log(min);
+        return min;
+    }
+    max(thresholdNumbers) {
+        const toValues = thresholdNumbers.map(x => x.to);
+        const min = Math.max(...toValues);
+        console.log("min");
+        console.log(min);
+        return min;
     }
     getChipColorFromCategory(category) {
         if (category === CategoryEnum_1.CategoryEnum.RED)

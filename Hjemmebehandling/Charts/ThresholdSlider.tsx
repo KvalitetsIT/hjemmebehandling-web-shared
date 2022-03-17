@@ -6,7 +6,6 @@ import { ThresholdNumber } from '../Models/ThresholdNumber';
 import { Question } from '../Models/Question';
 import { CategoryEnum } from '../Models/CategoryEnum';
 
-
 export interface Props {
     question: Question
     threshold: ThresholdNumber[]
@@ -68,6 +67,7 @@ export class ThresholdSlider extends Component<Props, {}> {
                             ...thresholdNumbers.map(t => this.renderMarks(() => t.to!))
                         ]}
                         max={this.max(thresholdNumbers)}
+                        min={this.min(thresholdNumbers)}
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="off"
                     />
@@ -118,7 +118,7 @@ export class ThresholdSlider extends Component<Props, {}> {
 
     generateColor(thresholdNumbers: ThresholdNumber[]): string {
         let string = "";
-        const hundredPercent = this.max(thresholdNumbers);
+        const hundredPercent = this.calculatetotalAmount(thresholdNumbers);
 
         let latestPercentageTo = 0;
         thresholdNumbers.forEach((t) => {
@@ -145,7 +145,7 @@ export class ThresholdSlider extends Component<Props, {}> {
         return "linear-gradient(90deg, " + string + ")";
     }
 
-    max(thresholdNumbers: ThresholdNumber[]): number {
+    calculatetotalAmount(thresholdNumbers: ThresholdNumber[]): number {
         let totalWidth: number = 0;
         thresholdNumbers.forEach(threshold => {
             const to = threshold.to ?? 100;
@@ -153,6 +153,20 @@ export class ThresholdSlider extends Component<Props, {}> {
             totalWidth += to - from
         })
         return totalWidth
+    }
+    min(thresholdNumbers: ThresholdNumber[]): number {
+        const fromValues: number[] = thresholdNumbers.map(x => x.from!)
+        const min = Math.min(...fromValues);
+        console.log("min")
+        console.log(min)
+        return min;
+    }
+    max(thresholdNumbers: ThresholdNumber[]): number {
+        const toValues: number[] = thresholdNumbers.map(x => x.to!)
+        const min = Math.max(...toValues);
+        console.log("min")
+        console.log(min)
+        return min;
     }
 
     greenLight = '#D0EFDC'
