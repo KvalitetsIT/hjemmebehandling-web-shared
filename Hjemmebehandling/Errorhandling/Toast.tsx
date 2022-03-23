@@ -6,7 +6,6 @@ import { Slide, SlideProps, Snackbar, Stack, Typography } from '@mui/material';
 export interface ToastData {
     snackbarColor: AlertColor
     snackbarTitle: string
-    textColor?: string
     onClose: () => void;
 
     icon?: JSX.Element
@@ -23,7 +22,6 @@ export class Toast extends Component<ToastData, State> {
     public static defaultProps = {
         positionVertical: "bottom",
         positionhorizontal: "right",
-        textColor: "white",
         onClose: () => { }
     };
 
@@ -53,11 +51,10 @@ export class Toast extends Component<ToastData, State> {
                     onClose={this.closeSnackbar}
                     anchorOrigin={{ vertical: this.props.positionVertical, horizontal: this.props.positionhorizontal }}
                 >
-                    <Alert icon={false} severity={props.snackbarColor} sx={{ width: '100%' }}>
-                        <Stack color={this.props.textColor} direction="row" alignItems="center" spacing={2}>
-                            {this.props.icon}
+                    <Alert icon={this.props.icon} severity={props.snackbarColor} sx={{ width: '100%' }}>
+                        <Stack direction="row" alignItems="center" spacing={2}>
                             <Stack>
-                                <Typography color={this.props.textColor}>{props.snackbarTitle}</Typography>
+                                <Typography>{props.snackbarTitle}</Typography>
                                 {props.children}
                             </Stack>
                         </Stack>
