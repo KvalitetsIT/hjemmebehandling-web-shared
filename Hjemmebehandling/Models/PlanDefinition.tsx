@@ -10,7 +10,8 @@ export class PlanDefinition extends FhirRessource {
     questionnaires?: Questionnaire[]
     status?: PlanDefinitionStatus | BaseModelStatus
     created?: Date
-
+    lastUpdated?: Date
+    
     static stringToPlanDefinitionStatus(stringStatus?: string): PlanDefinitionStatus | BaseModelStatus {
 
         switch (stringStatus) {
