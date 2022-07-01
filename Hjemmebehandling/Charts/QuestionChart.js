@@ -36,6 +36,7 @@ const chart_js_1 = require("chart.js");
 chart_js_1.Chart.register(chart_js_1.CategoryScale, chart_js_1.LinearScale, chart_js_1.PointElement, chart_js_1.LineElement, chartjs_plugin_annotation_1.default, chart_js_1.Title, chart_js_1.Legend);
 class QuestionChart extends react_1.Component {
     renderGraph(data) {
+        var _a, _b;
         //Remove all the legends for the thresholdvalues (since we are only interested in the question being a legend)
         const options = {
             maintainAspectRatio: false,
@@ -47,7 +48,9 @@ class QuestionChart extends react_1.Component {
                     },
                     grid: {
                         display: !this.props.minimal,
-                    }
+                    },
+                    suggestedMin: (_a = this.props.range) === null || _a === void 0 ? void 0 : _a.min,
+                    suggestedMax: (_b = this.props.range) === null || _b === void 0 ? void 0 : _b.max,
                 },
                 x: {
                     ticks: {
