@@ -17,7 +17,8 @@ export class Question extends BaseQuestion {
     helperText?: string
     abbreviation?: string
     enableWhen?: EnableWhen<boolean>
-    measurementType? : MeasurementType
+    measurementType?: MeasurementType
+    deprecated?: boolean 
 }
 
 export class CallToActionQuestion extends BaseQuestion {
