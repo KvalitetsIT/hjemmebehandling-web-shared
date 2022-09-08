@@ -57,7 +57,7 @@ class DialogError extends react_1.Component {
             react_1.default.createElement(material_1.Divider, null),
             react_1.default.createElement(material_1.DialogActions, null,
                 showCloseButton ? react_1.default.createElement(material_1.Button, { onClick: () => this.closeDialog() }, "Luk besked") : react_1.default.createElement(react_1.default.Fragment, null),
-                shouldShowReloadButton ? react_1.default.createElement(material_1.Button, { autoFocus: true, onClick: this.reloadPage }, "Opdat\u00E9r siden") : react_1.default.createElement(react_1.default.Fragment, null),
+                shouldShowReloadButton ? react_1.default.createElement(material_1.Button, { onClick: this.reloadPage }, "Opdat\u00E9r siden") : react_1.default.createElement(react_1.default.Fragment, null),
                 shouldShowLogout ? react_1.default.createElement(material_1.Button, { variant: "contained", onClick: this.logout }, "Log ud") : react_1.default.createElement(react_1.default.Fragment, null))));
     }
     logout() {

@@ -55,7 +55,7 @@ export class DialogError extends Component<Props, State>{
                 <Divider />
                 <DialogActions>
                     {showCloseButton ? <Button onClick={() => this.closeDialog()}>Luk besked</Button> : <></>}
-                    {shouldShowReloadButton ? <Button autoFocus onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
+                    {shouldShowReloadButton ? <Button onClick={this.reloadPage}>Opdatér siden</Button> : <></>}
                     {shouldShowLogout ? <Button variant="contained" onClick={this.logout}>Log ud</Button> : <></>}
                 </DialogActions>
             </Dialog>
