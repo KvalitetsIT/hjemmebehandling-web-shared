@@ -8,6 +8,10 @@ export class StringToEnumMappers {
                 return BaseModelStatus.DRAFT
             case "ACTIVE":
                 return BaseModelStatus.ACTIVE
+            case "RETIRED":
+                return BaseModelStatus.RETIRED
+            case "COMPLETED":
+                return BaseModelStatus.COMPLETED
             default:
                 return BaseModelStatus.UKENDT
         }
