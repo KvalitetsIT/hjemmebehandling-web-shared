@@ -9,6 +9,10 @@ class StringToEnumMappers {
                 return BaseModelStatus_1.BaseModelStatus.DRAFT;
             case "ACTIVE":
                 return BaseModelStatus_1.BaseModelStatus.ACTIVE;
+            case "RETIRED":
+                return BaseModelStatus_1.BaseModelStatus.RETIRED;
+            case "COMPLETED":
+                return BaseModelStatus_1.BaseModelStatus.COMPLETED;
             default:
                 return BaseModelStatus_1.BaseModelStatus.UKENDT;
         }
