@@ -40,17 +40,13 @@ export class DialogError extends Component<Props, State>{
                             <Typography variant="caption">{error.displayUrl()}</Typography>
                         </Stack>
                     </Stack>
-
-
                 </DialogTitle>
                 <Divider />
                 <DialogContent>
                     <DialogContentText>
-                        <Typography variant="body1">{error.displayMessage()}</Typography>
+                        <Typography variant="body1" style={{ whiteSpace: 'pre-line' }}>{error.displayMessage()}</Typography>
                         {this.props.children}
                     </DialogContentText>
-
-
                 </DialogContent>
                 <Divider />
                 <DialogActions>

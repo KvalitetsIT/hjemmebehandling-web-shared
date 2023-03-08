@@ -52,7 +52,7 @@ class DialogError extends react_1.Component {
             react_1.default.createElement(material_1.Divider, null),
             react_1.default.createElement(material_1.DialogContent, null,
                 react_1.default.createElement(material_1.DialogContentText, null,
-                    react_1.default.createElement(material_1.Typography, { variant: "body1" }, error.displayMessage()),
+                    react_1.default.createElement(material_1.Typography, { variant: "body1", style: { whiteSpace: 'pre-line' } }, error.displayMessage()),
                     this.props.children)),
             react_1.default.createElement(material_1.Divider, null),
             react_1.default.createElement(material_1.DialogActions, null,
