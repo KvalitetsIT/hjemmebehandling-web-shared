@@ -12,7 +12,7 @@ export interface Props {
   rerenderChildren: boolean
   ekstraText: string;
   showReloadButton: boolean;
-  ignoreAlert: boolean;
+  ignoreAlert?: boolean;
 }
 export interface State {
   error?: Error
