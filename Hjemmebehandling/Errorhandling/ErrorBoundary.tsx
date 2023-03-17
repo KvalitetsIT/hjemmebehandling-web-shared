@@ -12,6 +12,7 @@ export interface Props {
   rerenderChildren: boolean
   ekstraText: string;
   showReloadButton: boolean;
+  ignoreAlert: boolean;
 }
 export interface State {
   error?: Error
@@ -55,11 +56,15 @@ export class ErrorBoundary extends React.Component<Props, State> {
       }
 
       return (<>
-        <Alert severity="error" title={this.props.ekstraText}>
-          <Typography variant={this.props.ekstraText ? "caption" : "inherit"}>Der er opstået en fejl</Typography>
-          <Typography>{this.props.ekstraText}</Typography>
-          {this.props.showReloadButton ? <Button onClick={() => { this.reloadPage() }}>Genindlæs</Button> : <></>}
-        </Alert>
+
+        {this.props.ignoreAlert && (
+          <Alert severity="error" title={this.props.ekstraText}>
+            <Typography variant={this.props.ekstraText ? "caption" : "inherit"}>Der er opstået en fejl</Typography>
+            <Typography>{this.props.ekstraText}</Typography>
+            {this.props.showReloadButton ? <Button onClick={() => { this.reloadPage() }}>Genindlæs</Button> : <></>}
+          </Alert>
+        )}
+
         <ToastError error={this.state.error}></ToastError>
       </>)
     }
@@ -75,7 +80,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
       return this.state.error.displaySettings().displayInLargeDialog
     return false;
   }
-  
+
   reloadPage(): void {
     window.location.replace("/");
   }
