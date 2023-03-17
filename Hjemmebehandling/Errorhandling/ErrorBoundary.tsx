@@ -57,13 +57,13 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
       return (<>
 
-        {this.props.ignoreAlert && (
+        {this.props.ignoreAlert ? (
           <Alert severity="error" title={this.props.ekstraText}>
             <Typography variant={this.props.ekstraText ? "caption" : "inherit"}>Der er opstået en fejl</Typography>
             <Typography>{this.props.ekstraText}</Typography>
             {this.props.showReloadButton ? <Button onClick={() => { this.reloadPage() }}>Genindlæs</Button> : <></>}
           </Alert>
-        )}
+        ): this.props.children}
 
         <ToastError error={this.state.error}></ToastError>
       </>)

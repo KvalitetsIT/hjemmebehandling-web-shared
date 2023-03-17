@@ -33,10 +33,10 @@ class ErrorBoundary extends react_1.default.Component {
                 return (react_1.default.createElement(DialogError_1.DialogError, { error: this.state.error }));
             }
             return (react_1.default.createElement(react_1.default.Fragment, null,
-                this.props.ignoreAlert && (react_1.default.createElement(material_1.Alert, { severity: "error", title: this.props.ekstraText },
+                this.props.ignoreAlert ? (react_1.default.createElement(material_1.Alert, { severity: "error", title: this.props.ekstraText },
                     react_1.default.createElement(material_1.Typography, { variant: this.props.ekstraText ? "caption" : "inherit" }, "Der er opst\u00E5et en fejl"),
                     react_1.default.createElement(material_1.Typography, null, this.props.ekstraText),
-                    this.props.showReloadButton ? react_1.default.createElement(material_1.Button, { onClick: () => { this.reloadPage(); } }, "Genindl\u00E6s") : react_1.default.createElement(react_1.default.Fragment, null))),
+                    this.props.showReloadButton ? react_1.default.createElement(material_1.Button, { onClick: () => { this.reloadPage(); } }, "Genindl\u00E6s") : react_1.default.createElement(react_1.default.Fragment, null))) : this.props.children,
                 react_1.default.createElement(ToastError_1.ToastError, { error: this.state.error })));
         }
         return (react_1.default.createElement(react_1.default.Fragment, null, this.props.children));
