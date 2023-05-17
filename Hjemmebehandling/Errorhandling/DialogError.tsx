@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle, Typography, DialogContent, DialogContentText, DialogActions, Button, Stack, Divider } from "@mui/material";
-import React, { Component, ReactNode } from "react";
+import React, { Component, PropsWithChildren, ReactNode } from "react";
 import { BaseServiceError } from "./BaseServiceError";
 
 interface Props {
@@ -11,7 +11,7 @@ interface State {
     open: boolean
 }
 
-export class DialogError extends Component<Props, State>{
+export class DialogError extends Component<PropsWithChildren<Props>, State>{
 
     constructor(props: Props) {
         super(props)

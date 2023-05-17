@@ -11,6 +11,7 @@ export interface ToastData {
     icon?: JSX.Element
     positionVertical: "bottom" | "top"
     positionhorizontal: "right" | "left" | "center"
+    children?: JSX.Element | JSX.Element[] 
 }
 
 export interface State {

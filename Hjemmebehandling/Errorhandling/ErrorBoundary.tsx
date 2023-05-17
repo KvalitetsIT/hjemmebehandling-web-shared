@@ -1,11 +1,7 @@
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
-import React, { ErrorInfo } from "react";
+import { Alert, Button, Typography } from "@mui/material";
+import React, { ErrorInfo, PropsWithChildren } from "react";
 import { BaseServiceError } from "./BaseServiceError";
 import { DialogError } from "./DialogError";
-import { InternalServerError } from "./ServiceErrors/InternalServerError";
-import { NotCorrectRightsError } from "./ServiceErrors/NotCorrectRightsError";
-import { UnknownServiceError } from "./ServiceErrors/UnknownServiceError";
-import { UnsupportedError } from "./ServiceErrors/UnsupportedError";
 import { ToastError } from "./ToastError";
 
 export interface Props {
@@ -19,7 +15,7 @@ export interface State {
   open: boolean
 }
 
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends React.Component<PropsWithChildren<Props>, State> {
   public static defaultProps = {
     rerenderChildren: false,
     ekstraText: "",

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, PropsWithChildren } from "react";
 import { Card, CardContent, Typography } from '@mui/material';
 import React from "react";
 
@@ -9,7 +9,7 @@ interface Props {
     jsxWhenEmpty: JSX.Element | string;
 }
 
-export default class IsEmptyCard extends Component<Props, {}>{
+export default class IsEmptyCard extends Component<PropsWithChildren<Props>, {}>{
     public static defaultProps = {
         useRawJsxWhenEmpty: false
     };
