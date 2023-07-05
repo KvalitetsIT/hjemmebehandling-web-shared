@@ -20,8 +20,7 @@ export default class IsEmptyCard extends Component<PropsWithChildren<Props>, {}>
         
         if (listIsEmpty && objectIsUndefined) {
 
-            if (this.props.useRawJsxWhenEmpty)
-                return <>{this.props.jsxWhenEmpty}</>
+            if (this.props.useRawJsxWhenEmpty) return <>{this.props.jsxWhenEmpty}</>
 
             return (
                 <Card>
@@ -30,7 +29,6 @@ export default class IsEmptyCard extends Component<PropsWithChildren<Props>, {}>
                     </CardContent>
                 </Card>
             )
-
         }
 
         return this.props.children as JSX.Element;

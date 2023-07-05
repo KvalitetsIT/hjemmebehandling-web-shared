@@ -18,7 +18,7 @@ import {
   Legend,
 } from 'chart.js';
 
-ChartJS.register(
+ChartJS && ChartJS.register(
 
   CategoryScale,
   LinearScale,
