@@ -28,7 +28,6 @@ export class ThresholdSlider extends Component<Props, {}> {
         const thresholdNumbers = this.props.threshold.sort(this.compareThresholdNumbers);
         console.log(thresholdNumbers)
         return (
-            <Box paddingRight={5} paddingLeft={5}>
                 <ThemeProvider theme={createTheme({
                     components: {
                         MuiSlider: {
@@ -52,6 +51,8 @@ export class ThresholdSlider extends Component<Props, {}> {
                         }
                     }
                 })}>
+            <Box paddingRight={5} paddingLeft={5}>
+
                     <Slider
                         disableSwap
                         sx={{
@@ -71,8 +72,8 @@ export class ThresholdSlider extends Component<Props, {}> {
                         aria-labelledby="discrete-slider"
                         valueLabelDisplay="off"
                     />
-                </ThemeProvider>
             </Box>
+                </ThemeProvider>
         );
     }
 
@@ -158,14 +159,11 @@ export class ThresholdSlider extends Component<Props, {}> {
         const fromValues: number[] = thresholdNumbers.map(x => x.from!)
         const min = Math.min(...fromValues);
         console.log("min")
-        console.log(min)
         return min;
     }
     max(thresholdNumbers: ThresholdNumber[]): number {
         const toValues: number[] = thresholdNumbers.map(x => x.to!)
         const min = Math.max(...toValues);
-        console.log("min")
-        console.log(min)
         return min;
     }
 

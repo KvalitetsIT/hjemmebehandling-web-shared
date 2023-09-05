@@ -35,7 +35,7 @@ export interface Props {
   minimal: boolean;
   minHeight: number;
   maxHeight: number;
-  range?: {min: number, max: number} 
+  range?: { min: number, max: number }
 }
 
 export class QuestionChart extends Component<Props, {}> {
@@ -121,3 +121,4 @@ export class QuestionChart extends Component<Props, {}> {
     return (<>{this.renderGraph(data)}</>);
   }
 }
+

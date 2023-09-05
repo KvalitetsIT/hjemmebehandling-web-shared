@@ -1,4 +1,3 @@
-import { StringMappingType } from "typescript";
 import { NumberAnswer } from "../Models/Answer";
 import { CategoryEnum } from "../Models/CategoryEnum";
 import { Question } from "../Models/Question";

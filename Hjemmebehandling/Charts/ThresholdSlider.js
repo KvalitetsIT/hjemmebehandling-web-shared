@@ -46,30 +46,30 @@ class ThresholdSlider extends react_1.Component {
     render() {
         const thresholdNumbers = this.props.threshold.sort(this.compareThresholdNumbers);
         console.log(thresholdNumbers);
-        return (React.createElement(Box_1.default, { paddingRight: 5, paddingLeft: 5 },
-            React.createElement(material_1.ThemeProvider, { theme: (0, material_1.createTheme)({
-                    components: {
-                        MuiSlider: {
-                            styleOverrides: {
-                                track: {
-                                    background: this.generateColor(thresholdNumbers),
-                                    height: 20,
-                                    border: 0,
-                                },
-                                thumbColorPrimary: {
-                                    opacity: 0
-                                },
-                            }
-                        },
-                        MuiFilledInput: {
-                            styleOverrides: {
-                                root: {
-                                    backgroundColor: "transparent"
-                                }
+        return (React.createElement(material_1.ThemeProvider, { theme: (0, material_1.createTheme)({
+                components: {
+                    MuiSlider: {
+                        styleOverrides: {
+                            track: {
+                                background: this.generateColor(thresholdNumbers),
+                                height: 20,
+                                border: 0,
+                            },
+                            thumbColorPrimary: {
+                                opacity: 0
+                            },
+                        }
+                    },
+                    MuiFilledInput: {
+                        styleOverrides: {
+                            root: {
+                                backgroundColor: "transparent"
                             }
                         }
                     }
-                }) },
+                }
+            }) },
+            React.createElement(Box_1.default, { paddingRight: 5, paddingLeft: 5 },
                 React.createElement(material_1.Slider, { disableSwap: true, sx: {
                         minHeight: 50,
                     }, key: "slider_" + this.props.question.Id, value: [
@@ -147,14 +147,11 @@ class ThresholdSlider extends react_1.Component {
         const fromValues = thresholdNumbers.map(x => x.from);
         const min = Math.min(...fromValues);
         console.log("min");
-        console.log(min);
         return min;
     }
     max(thresholdNumbers) {
         const toValues = thresholdNumbers.map(x => x.to);
         const min = Math.max(...toValues);
-        console.log("min");
-        console.log(min);
         return min;
     }
     getChipColorFromCategory(category) {
