@@ -26,9 +26,18 @@ class ResponseViewCard extends react_2.Component {
         react_1.default.createElement(material_1.Button, { sx: { fontWeight: this.getFontWeight(mode) }, onClick: () => this.setState({ displayType: mode }) }, mode.toString());
     }
     renderGraphTableSwitch() {
+        const graphButtonWeight = this.state.displayType == DisplayModeEnum.GRAPH ? "bold" : "normal";
+        const tableButtonWeight = this.state.displayType == DisplayModeEnum.TABLE ? "bold" : "normal";
         return (react_1.default.createElement(react_1.default.Fragment, null,
-            this.renderButton(DisplayModeEnum.GRAPH),
-            this.renderButton(DisplayModeEnum.TABLE)));
+            react_1.default.createElement(material_1.Button, { sx: { fontWeight: graphButtonWeight }, onClick: () => this.setState({ displayType: DisplayModeEnum.GRAPH }) }, "Graf"),
+            react_1.default.createElement(material_1.Button, { sx: { fontWeight: tableButtonWeight }, onClick: () => this.setState({ displayType: DisplayModeEnum.TABLE }) }, "Liste")));
+    }
+    renderContent(mode) {
+        switch (mode) {
+            case DisplayModeEnum.GRAPH: return (this.props.graph);
+            case DisplayModeEnum.TABLE: return (this.props.table);
+            default: return (this.props.graph);
+        }
     }
     render() {
         var _a;
@@ -37,8 +46,9 @@ class ResponseViewCard extends react_2.Component {
             react_1.default.createElement(material_1.CardHeader, { action: (_a = this.props.cardAction) !== null && _a !== void 0 ? _a : this.renderGraphTableSwitch(), subheader: react_1.default.createElement(material_1.Typography, { variant: "h6", fontWeight: "bold" }, chartData.label) }),
             react_1.default.createElement(material_1.Divider, null),
             react_1.default.createElement(material_1.CardContent, null,
-                this.state.displayType == DisplayModeEnum.GRAPH ? this.props.graph : react_1.default.createElement(react_1.default.Fragment, null),
-                this.state.displayType == DisplayModeEnum.TABLE ? this.props.table : react_1.default.createElement(react_1.default.Fragment, null))));
+                " ",
+                this.renderContent(this.state.displayType),
+                " ")));
     }
 }
 exports.default = ResponseViewCard;

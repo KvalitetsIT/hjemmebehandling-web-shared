@@ -40,18 +40,30 @@ export default class ResponseViewCard extends Component<Props, State> {
     }
 
     renderButton(mode: DisplayModeEnum) {
-        <Button sx={{ fontWeight: this.getFontWeight(mode) }} onClick={() => this.setState({ displayType: mode })}>{mode.toString()}</Button>
+        <Button
+            sx={{ fontWeight: this.getFontWeight(mode) }}
+            onClick={() => this.setState({ displayType: mode })}
+        >{mode.toString()}</Button>
     }
 
     renderGraphTableSwitch() {
+        const graphButtonWeight = this.state.displayType == DisplayModeEnum.GRAPH ? "bold" : "normal";
+        const tableButtonWeight = this.state.displayType == DisplayModeEnum.TABLE ? "bold" : "normal";
         return (
             <>
-                {this.renderButton(DisplayModeEnum.GRAPH)}
-                {this.renderButton(DisplayModeEnum.TABLE)}
+                <Button sx={{ fontWeight: graphButtonWeight }} onClick={() => this.setState({ displayType: DisplayModeEnum.GRAPH })}>Graf</Button>
+                <Button sx={{ fontWeight: tableButtonWeight }} onClick={() => this.setState({ displayType: DisplayModeEnum.TABLE })}>Liste</Button>
             </>
         )
     }
 
+    renderContent(mode: DisplayModeEnum) {
+        switch (mode) {
+            case DisplayModeEnum.GRAPH: return (this.props.graph)
+            case DisplayModeEnum.TABLE: return (this.props.table)
+            default: return (this.props.graph)
+        }
+    }
     render(): ReactNode {
         const chartData = this.props.chartData;
 
@@ -59,10 +71,7 @@ export default class ResponseViewCard extends Component<Props, State> {
             <Card>
                 <CardHeader action={this.props.cardAction ?? this.renderGraphTableSwitch()} subheader={<Typography variant="h6" fontWeight="bold">{chartData.label}</Typography>} />
                 <Divider />
-                <CardContent>
-                    {this.state.displayType == DisplayModeEnum.GRAPH ? this.props.graph : <></>}
-                    {this.state.displayType == DisplayModeEnum.TABLE ? this.props.table : <></>}
-                </CardContent>
+                <CardContent> {this.renderContent(this.state.displayType)} </CardContent>
             </Card>
         )
     }
