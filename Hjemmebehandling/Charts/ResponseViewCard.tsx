@@ -46,20 +46,11 @@ export default class ResponseViewCard extends Component<Props, State> {
     renderGraphTableSwitch() {
         return (
             <>
-                {
-                    Object.values(DisplayModeEnum).forEach(element => {
-                        this.renderButton(element)
-                    })
-                }</>
+                {this.renderButton(DisplayModeEnum.GRAPH)}
+                {this.renderButton(DisplayModeEnum.TABLE)}
+            </>
         )
     }
-
-    // Graph
-    // <LineChart showThresholds={this.props.showThresholds} chartData={chartData} />
-
-    // Table
-    // <TableChart chartData={chartData} />
-
 
     render(): ReactNode {
         const chartData = this.props.chartData;

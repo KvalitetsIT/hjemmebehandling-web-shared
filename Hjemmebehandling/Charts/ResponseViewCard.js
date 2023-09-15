@@ -26,14 +26,10 @@ class ResponseViewCard extends react_2.Component {
         react_1.default.createElement(material_1.Button, { sx: { fontWeight: this.getFontWeight(mode) }, onClick: () => this.setState({ displayType: mode }) }, mode.toString());
     }
     renderGraphTableSwitch() {
-        return (react_1.default.createElement(react_1.default.Fragment, null, Object.values(DisplayModeEnum).forEach(element => {
-            this.renderButton(element);
-        })));
+        return (react_1.default.createElement(react_1.default.Fragment, null,
+            this.renderButton(DisplayModeEnum.GRAPH),
+            this.renderButton(DisplayModeEnum.TABLE)));
     }
-    // Graph
-    // <LineChart showThresholds={this.props.showThresholds} chartData={chartData} />
-    // Table
-    // <TableChart chartData={chartData} />
     render() {
         var _a;
         const chartData = this.props.chartData;
