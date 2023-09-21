@@ -45,8 +45,7 @@ export default class BaseService {
     }
 
     HandleError(error: any): any {
-        console.debug("Transforming error to ApplicationError")
-        console.log(error)
+        console.debug("Transforming error to ApplicationError. Error: ", error)
         let errorIsApiError = error instanceof BaseApiError
         let errorIsServiceError = error instanceof BaseServiceError
         if (errorIsApiError)

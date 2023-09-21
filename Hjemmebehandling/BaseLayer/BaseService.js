@@ -38,8 +38,7 @@ class BaseService {
             throw new InvalidInputError_1.InvalidInputError(errors);
     }
     HandleError(error) {
-        console.debug("Transforming error to ApplicationError");
-        console.log(error);
+        console.debug("Transforming error to ApplicationError. Error: ", error);
         let errorIsApiError = error instanceof BaseApiError_1.BaseApiError;
         let errorIsServiceError = error instanceof BaseServiceError_1.BaseServiceError;
         if (errorIsApiError)
