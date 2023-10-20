@@ -12,10 +12,10 @@ export default class BaseApi {
         
         console.debug("Transforming error to ServiceError. Error:", error)
     
-        if ((error as any).response  instanceof Response) {
-
-            let response = (error as any).response as Response
-
+        if ((error as any).response  instanceof Response || error instanceof Response) {
+            
+            let response : Response  = ((error as any).response  instanceof Response ) ? (error as any).response as Response : error as Response
+            
             let bodyText = "Fejl i data fra bagvedliggende api" // Bliver overskrevet såfremt vi godt kan få teksten ud fra response
             let errorDto : IRawApiError = {}
 

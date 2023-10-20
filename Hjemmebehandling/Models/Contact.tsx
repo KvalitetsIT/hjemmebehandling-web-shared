@@ -1,10 +1,11 @@
 import { StringFormatter } from "../Helpers/ModelHelpers/StringFormatters";
+import { Address } from "./Address";
 
-export class Contact {
-    fullname? : string;
+export class ContactDetails {
+    email?: string
     primaryPhone? : string
     secondaryPhone? : string
-    affiliation? : string; // f.eks. "kone", "ven", "far" etc
+    address?: Address
 
     primaryPhonenumberToString() : string {
         return StringFormatter.FormatPhonenumber(this.primaryPhone);

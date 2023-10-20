@@ -8,8 +8,8 @@ class BaseApi {
      */
     async HandleError(error) {
         console.debug("Transforming error to ServiceError. Error:", error);
-        if (error.response instanceof Response) {
-            let response = error.response;
+        if (error.response instanceof Response || error instanceof Response) {
+            let response = (error.response instanceof Response) ? error.response : error;
             let bodyText = "Fejl i data fra bagvedliggende api"; // Bliver overskrevet såfremt vi godt kan få teksten ud fra response
             let errorDto = {};
             try {
