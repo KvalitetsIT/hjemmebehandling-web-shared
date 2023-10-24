@@ -9,7 +9,7 @@ import { PrimaryContact } from "./PrimaryContact";
 //-patient-details
 export class PatientDetail extends PatientSimple {
     contact? : ContactDetails;
-    primaryContacts?: PrimaryContact[];
+    primaryContact?: PrimaryContact;
     username? : string;
 
 }
