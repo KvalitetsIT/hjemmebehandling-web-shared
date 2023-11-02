@@ -6,6 +6,7 @@ import SimpleDepartment from "./SimpleOrganization";
     address? : Address
     phoneNumber? : string
     phoneHours? : PhoneHour[]
+    html?: string
 }
 
 export class PhoneHour{
