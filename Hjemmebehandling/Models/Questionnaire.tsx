@@ -13,7 +13,8 @@ export class Questionnaire extends FhirRessource {
     thresholds?: ThresholdCollection[];
     questions?: BaseQuestion[]
     status?: QuestionnaireStatus | BaseModelStatus;
-    lastUpdated?: Date
+    lastUpdated?: Date;
+    staticReviewSummaryHtml? : string;
 
     getCallToActions(): CallToActionQuestion[] {
         return this.questions?.filter(q => q instanceof CallToActionQuestion && q.type == QuestionTypeEnum.CALLTOACTION) ?? []
