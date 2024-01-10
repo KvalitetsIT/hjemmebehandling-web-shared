@@ -25,4 +25,5 @@ var QuestionTypeEnum;
     QuestionTypeEnum["OBSERVATION"] = "M\u00E5ling";
     QuestionTypeEnum["STRING"] = "STRING";
     QuestionTypeEnum["CALLTOACTION"] = "CALLTOACTION";
+    QuestionTypeEnum["GROUP"] = "GROUP";
 })(QuestionTypeEnum = exports.QuestionTypeEnum || (exports.QuestionTypeEnum = {}));

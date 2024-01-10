@@ -19,6 +19,7 @@ export class Question extends BaseQuestion {
     enableWhen?: EnableWhen<boolean>
     measurementType?: MeasurementType
     deprecated?: boolean 
+    subQuestions?: Array<Question>
 }
 
 export class CallToActionQuestion extends BaseQuestion {
@@ -37,5 +38,6 @@ export enum QuestionTypeEnum {
     INTEGER = 'INTEGER',
     OBSERVATION = 'Måling', // Måling/Observation etc!
     STRING = 'STRING',
-    CALLTOACTION = "CALLTOACTION"
+    CALLTOACTION = "CALLTOACTION",
+    GROUP = "GROUP"
 }
