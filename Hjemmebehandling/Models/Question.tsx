@@ -1,14 +1,9 @@
 import { EnableWhen } from "./EnableWhen";
-import { IComparable } from "./Interfaces/IComparable";
 import { MeasurementType } from "./MeasurementType";
 
-export class BaseQuestion implements IComparable<Question>{
-    isEqual(other: Question): boolean {
-        return this.Id === other.Id;
-    }
+export class BaseQuestion {
     Id?: string
     type?: QuestionTypeEnum
-
 }
 
 export class Question extends BaseQuestion {

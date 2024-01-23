@@ -77,7 +77,7 @@ class ChartData {
         for (let responseIndex = 0; responseIndex < questionnaireResponses.length; responseIndex++) {
             const response = questionnaireResponses[responseIndex];
             if (response && response.questions) {
-                const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.isEqual(question));
+                const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id === question.Id);
                 const answer = response.questions.get(questionnaireQuestion);
                 if ((answer === null || answer === void 0 ? void 0 : answer.answer) != undefined) {
                     this.answerData.push(answer.answer);

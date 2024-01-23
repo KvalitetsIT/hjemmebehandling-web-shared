@@ -121,7 +121,7 @@ export default class ChartData {
 
             const response = questionnaireResponses[responseIndex];
             if (response && response.questions) {
-                const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.isEqual(question));
+                const questionnaireQuestion = Array.from(response.questions.keys()).find(x => x.Id === question.Id);
                 const answer = response.questions.get(questionnaireQuestion!) as NumberAnswer | undefined
 
                 if (answer?.answer != undefined) {
