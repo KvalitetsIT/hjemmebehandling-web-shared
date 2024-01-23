@@ -8,7 +8,7 @@ export class QuestionnaireResponse extends FhirRessource{
     id! : string
     questionnaireId! : string
     carePlanId!: string
-    questions? : Map<Question,Answer>;
+    questions? : Map<Question,Answer<any>>;
     answeredTime! : Date | undefined ;
     examinedTime? : Date | undefined ;
     status! : QuestionnaireResponseStatus

@@ -2,22 +2,22 @@ interface IAnswer{
     ToString : () => string
     AnswerAsString : () => string | undefined
 }
-class BaseAnswer implements IAnswer {
+
+export abstract class Answer<T> implements IAnswer {
     questionId!: string
-    ToString() : string { return ""; }
-    AnswerAsString() : string | undefined { return undefined; }
-}
-export class Answer extends BaseAnswer {
-    questionId!: string
-    ToString() : string { return ""; }
-    AnswerAsString() : string | undefined { return undefined; }
+    answer?: T
+
+    setAnswer(answer: T) {
+        this.answer = answer
+    }
+
+    abstract ToString() : string
+    abstract AnswerAsString() : string | undefined 
 }
 
-export class StringAnswer extends Answer {
-    answer? : string
+export class StringAnswer extends Answer<string> {
     
     ToString() : string {
-
         return this.answer ? this.answer : "" 
     }
     AnswerAsString(): string | undefined {
@@ -25,10 +25,9 @@ export class StringAnswer extends Answer {
     }
 }
 
-export class NumberAnswer extends Answer {
-    answer? : number
+export class NumberAnswer extends Answer<number> {
     unit? : UnitType
-    
+
     ToString() : string {
         let toReturn = "";
         toReturn += this.answer == undefined ? "" : this.answer;
@@ -43,9 +42,7 @@ export class NumberAnswer extends Answer {
     }
 }
 
-export class BooleanAnswer extends Answer {
-    answer! : boolean
-    
+export class BooleanAnswer extends Answer<boolean> {
     ToString() : string {
        return this.answer ? "Ja" : "Nej"
     }
@@ -54,8 +51,14 @@ export class BooleanAnswer extends Answer {
     }
 }
 
-export class GroupAnswer extends Answer {
-    subAnswers!: Array<BaseAnswer>
+export class GroupAnswer extends Answer<Array<any>> {
+
+    ToString(): string {
+        return this.answer?.map(answer => answer.ToString()).toString() ?? ""
+    }
+    AnswerAsString(): string | undefined {
+        return this.answer?.map(answer => answer.AnswerAsString()).toString() ?? ""
+    }
 }
 
 export enum  UnitType {

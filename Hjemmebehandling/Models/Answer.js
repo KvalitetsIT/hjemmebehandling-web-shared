@@ -1,13 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnitType = exports.GroupAnswer = exports.BooleanAnswer = exports.NumberAnswer = exports.StringAnswer = exports.Answer = void 0;
-class BaseAnswer {
-    ToString() { return ""; }
-    AnswerAsString() { return undefined; }
-}
-class Answer extends BaseAnswer {
-    ToString() { return ""; }
-    AnswerAsString() { return undefined; }
+class Answer {
+    setAnswer(answer) {
+        this.answer = answer;
+    }
 }
 exports.Answer = Answer;
 class StringAnswer extends Answer {
@@ -42,6 +39,14 @@ class BooleanAnswer extends Answer {
 }
 exports.BooleanAnswer = BooleanAnswer;
 class GroupAnswer extends Answer {
+    ToString() {
+        var _a, _b;
+        return (_b = (_a = this.answer) === null || _a === void 0 ? void 0 : _a.map(answer => answer.ToString()).toString()) !== null && _b !== void 0 ? _b : "";
+    }
+    AnswerAsString() {
+        var _a, _b;
+        return (_b = (_a = this.answer) === null || _a === void 0 ? void 0 : _a.map(answer => answer.AnswerAsString()).toString()) !== null && _b !== void 0 ? _b : "";
+    }
 }
 exports.GroupAnswer = GroupAnswer;
 var UnitType;
