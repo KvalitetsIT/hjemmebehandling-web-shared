@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnitType = exports.GroupAnswer = exports.BooleanAnswer = exports.NumberAnswer = exports.StringAnswer = exports.Answer = void 0;
 class Answer {
+    constructor(questionId) {
+        this.questionId = questionId;
+    }
     setAnswer(answer) {
         this.answer = answer;
     }

@@ -4,8 +4,12 @@ interface IAnswer{
 }
 
 export abstract class Answer<T> implements IAnswer {
-    questionId!: string
+    questionId: string
     answer?: T
+
+    constructor(questionId: string){
+        this.questionId = questionId;
+    }
 
     setAnswer(answer: T) {
         this.answer = answer
