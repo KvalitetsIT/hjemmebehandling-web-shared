@@ -56,7 +56,6 @@ export class ChoiceAnswer extends Answer<string | number> {
     }
 }
 
-
 export class BooleanAnswer extends Answer<boolean> {
     ToString() : string {
        return this.answer ? "Ja" : "Nej"
