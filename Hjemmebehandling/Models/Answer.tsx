@@ -46,6 +46,17 @@ export class NumberAnswer extends Answer<number> {
     }
 }
 
+
+export class ChoiceAnswer extends Answer<string | number> {
+    ToString() : string {
+       return this.answer + ""
+    }
+    AnswerAsString(): string | undefined {
+        return this.answer + "";
+    }
+}
+
+
 export class BooleanAnswer extends Answer<boolean> {
     ToString() : string {
        return this.answer ? "Ja" : "Nej"
