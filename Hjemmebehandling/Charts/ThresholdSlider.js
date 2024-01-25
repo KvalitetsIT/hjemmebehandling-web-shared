@@ -70,6 +70,10 @@ class ThresholdSlider extends react_1.Component {
                 }
             }) },
             React.createElement(Box_1.default, { paddingRight: 5, paddingLeft: 5 },
+                this.props.displayType ?
+                    React.createElement(material_1.Typography, null, this.props.displayType)
+                    :
+                        React.createElement(React.Fragment, null),
                 React.createElement(material_1.Slider, { disableSwap: true, sx: {
                         minHeight: 50,
                     }, key: "slider_" + this.props.question.Id, value: [
