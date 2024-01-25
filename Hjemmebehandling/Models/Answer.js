@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitType = exports.GroupAnswer = exports.BooleanAnswer = exports.NumberAnswer = exports.StringAnswer = exports.Answer = void 0;
+exports.UnitType = exports.GroupAnswer = exports.BooleanAnswer = exports.ChoiceAnswer = exports.NumberAnswer = exports.StringAnswer = exports.Answer = void 0;
 class Answer {
     constructor(questionId) {
         this.questionId = questionId;
@@ -32,6 +32,15 @@ class NumberAnswer extends Answer {
     }
 }
 exports.NumberAnswer = NumberAnswer;
+class ChoiceAnswer extends Answer {
+    ToString() {
+        return this.answer + "";
+    }
+    AnswerAsString() {
+        return this.answer + "";
+    }
+}
+exports.ChoiceAnswer = ChoiceAnswer;
 class BooleanAnswer extends Answer {
     ToString() {
         return this.answer ? "Ja" : "Nej";

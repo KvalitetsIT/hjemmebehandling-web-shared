@@ -9,6 +9,7 @@ import { CategoryEnum } from '../Models/CategoryEnum';
 export interface Props {
     question: Question
     threshold: ThresholdNumber[]
+    displayType?: string
 }
 
 export class ThresholdSlider extends Component<Props, {}> {
@@ -52,6 +53,12 @@ export class ThresholdSlider extends Component<Props, {}> {
                     }
                 })}>
             <Box paddingRight={5} paddingLeft={5}>
+                {this.props.displayType ? 
+                    <Typography>{this.props.displayType}</Typography>
+                    :
+                    <></>
+                
+                }
 
                     <Slider
                         disableSwap
