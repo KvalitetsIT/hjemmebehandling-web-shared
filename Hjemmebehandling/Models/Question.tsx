@@ -1,3 +1,4 @@
+import { CategoryEnum } from "./CategoryEnum";
 import { EnableWhen } from "./EnableWhen";
 import { MeasurementType } from "./MeasurementType";
 
@@ -6,7 +7,7 @@ export class BaseQuestion {
     type?: QuestionTypeEnum
 }
 
-export type Option = { option: string, comment: string, triage: string }
+export type Option = { option: string, comment: string, triage: CategoryEnum }
 
 export class Question extends BaseQuestion {
     question?: string
