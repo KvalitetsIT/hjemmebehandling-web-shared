@@ -6,9 +6,11 @@ export class BaseQuestion {
     type?: QuestionTypeEnum
 }
 
+export type Option = { option: string, comment: string, triage: string }
+
 export class Question extends BaseQuestion {
     question?: string
-    options?: Array<string>;
+    options?: Array<Option>;
     helperText?: string
     abbreviation?: string
     enableWhen?: EnableWhen<boolean>
