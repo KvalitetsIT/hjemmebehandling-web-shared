@@ -3,7 +3,7 @@ import { BaseServiceError, DisplaySettings } from "../BaseServiceError";
 
 export class NotCorrectRightsError extends BaseServiceError {
     displayMessage() {
-        return "Du har desværre ikke rettigheder til at tilgå denne funktion";
+        return "Du har desværre ikke rettigheder til at tilgå denne funktion. Kontakt Servicedesk";
     }
     
     displayTitle(){
